@@ -25,7 +25,7 @@ var markerIcons = ["marker_studying.png", "marker_tutoring.png", "marker_career.
 "marker_studying_grey.png","marker_tutoring_grey.png","marker_career_grey.png","marker_scholarship_grey.png"]
 markerIcons.forEach(item => {
   var myIcon = L.icon({
-    iconUrl: item,
+    iconUrl: "/images/markers/"+item,
     iconSize: [30, 30],
     shadowSize: [0, 0]
   });
@@ -90,9 +90,9 @@ function getData() {
         //change these lines to make the icon different
         var ind = Math.min(Math.floor(dist / 2.5), 3);
         var ind = getRandomNumber(0,3)
-        if(dist > 3){
-            ind+=3
-        }
+        // if(dist > 5){
+        //     ind+=4
+        // }
         var newMarker = new L.marker(coords, { icon: iconsList[ind] })
         markers[ind].push(newMarker)
         newMarker.addTo(map).on("click", function (e) {
@@ -198,12 +198,12 @@ function handleMapPreference(checkbox) {
 }
 
 var startIcon = L.icon({
-  iconUrl: 'marker_start.png',
+  iconUrl: '/images/markers/marker_start.png',
   iconSize: [30, 30]
 });
 
 var endIcon = L.icon({
-  iconUrl: 'marker_blank.png',
+  iconUrl: '/images/markers/marker_blank.png',
   iconSize: [30, 30]
 });
 
