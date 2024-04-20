@@ -8,6 +8,7 @@
   <video id="videoElement" autoplay></video>
   <canvas id="canvasElement" style="display: none;"></canvas>
   <span id="num"></span>
+  <span id="tired"></span>
   <script>
     const videoElement = document.getElementById('videoElement');
     const canvasElement = document.getElementById('canvasElement');
@@ -44,6 +45,7 @@
             .then(response => response.json())
             .then(data => {
               document.getElementById("num").textContent = data.count;
+              document.getElementById("tired").textContent = data.isTired;
             })
             .catch(error => {
               console.log('Error uploading image:', error);

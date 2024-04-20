@@ -32,7 +32,7 @@ def upload_image():
     dd.faceSentiBytesSrc(data)
     # print(dir(image))
     
-    return jsonify({'message': 'Image uploaded successfully','count':dd.getCount()})
+    return jsonify({'message': 'Image uploaded successfully','count':dd.getCount(),'isTired':(dd.getCount()>=6)})
 
 if __name__ == "__main__":
     # Replace with your desired host and port
