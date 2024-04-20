@@ -249,3 +249,13 @@ function routeToPoint(coords, lineColor) {
     createMarker: function () { return null; }
   }).addTo(map);
 }
+
+var form = document.getElementById("information");
+function getFormData(event) {
+  event.preventDefault();
+  info = Array.prototype.slice.call(form.elements, 0, 5);
+  Array.prototype.forEach.call(info, item => {
+    console.log(item.value); //to get the form values 
+  });
+}
+form.addEventListener('submit', getFormData);

@@ -286,16 +286,16 @@
 					<!-- <p>Please enter your information to receive personalized recommendations.</p> -->
 				</header>
 				<!-- <h3>Form</h3> -->
-				<form method="post" action="#">
+				<form method="post" id="information">
 					<div class="row gtr-uniform gtr-50">
 						<div class="col-6 col-12-mobilep">
 							<input type="text" name="name" id="name" value="" placeholder="Name:" />
 						</div>
 						<div class="col-6 col-12-mobilep">
-							<input type="email" name="age" id="email" value="" placeholder="Age:" />
+							<input type="text" name="age" id="email" value="" placeholder="Age:" />
 						</div>
 						<div class="col-12">
-							<select name="category" id="category">
+							<select name="gender" id="category">
 								<option value="">I identify as:</option>
 								<option value="gender_male">Male</option>
 								<option value="gender_female">Female</option>
@@ -303,7 +303,7 @@
 							</select>
 						</div>
 						<div class="col-12">
-							<select name="category" id="category">
+							<select name="subject" id="category">
 								<option value="">I need help studying:</option>
 								<option value="study_math">Math</option>
 								<option value="study_science">Science</option>
