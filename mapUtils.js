@@ -316,7 +316,7 @@ function routeToPoint(coords, lineColor) {
 
 var form = document.getElementById("information");
 function getFormData(event) {
-  //event.preventDefault();
+  event.preventDefault();
   info = Array.prototype.slice.call(form.elements, 0, 5);
   Array.prototype.forEach.call(info, item => {
     console.log(item.value); //to get the form values 
