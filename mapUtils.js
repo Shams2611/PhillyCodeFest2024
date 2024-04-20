@@ -148,13 +148,27 @@ function validateCheck(name, val) {
 }
 
 function evaluateStar(rating, index) {
-    console.log("rating: "+rating+"index:"+index)
-    console.log(rating-index)
-    divElement = document.getElementById("star"+index+1)
-    const children = divElement.children;
-    for (let i = 0; i < children.length; i++) {
-        children[i].style.display = "none";
+    num = rating-index
+    
+    divElement = document.getElementById("star"+(index+1))
+    children = divElement.children
+    children[0].style = "display: none;"
+    children[1].style = "display: none;"
+    children[2].style = "display: none;"
+    //this is very bad code please fix later
+    if(num >= 1){
+        children[0].style = "display: block;"
     }
+    else if (num >= 0.5){
+        children[1].style = "display: block;"
+    }
+    else{
+        children[2].style = "display: block;"
+    }
+    // const children = divElement.children;
+    // for (let i = 0; i < children.length; i++) {
+    //     children[i].style.display = "none";
+    // }
 }
 
 getData()
