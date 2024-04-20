@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from drowsy_detection_code import *
 
 app = Flask(__name__, static_url_path="/", static_folder="../")
 CORS(app)  # Enable CORS for all routes by default
