@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Study Planner</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        .features-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+        .box {
+            margin-bottom: 20px;
+        }
+        .video-stream, .pomodoro-timer, .todo-list {
+            flex-basis: calc(50% - 10px);
+            margin: 5px;
+            background: #f8f8f8;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .todo-list {
+            flex-basis: 100%;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="is-preload">
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1><a href="index.html">Opportunity Finder</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="study_planner.html" class="active">Study Planner</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main -->
+        <section id="main" class="container">
+            <header>
+                <h2>Study Organizer</h2>
+                <p>Organize and manage your study sessions effectively</p>
+            </header>
+            <div class="box features-row">
+                <section class="video-stream">
+                    <h3>Study Session Stream</h3>
+                    <p><video controls>Your browser does not support the video tag.</video></p>
+                    <p>Drowsiness detection active</p>
+                </section>
+                <section class="pomodoro-timer">
+                    <h3>Pomodoro Timer</h3>
+                    <p>25:00</p>
+                    <button>Start</button>
+                </section>
+                <section class="todo-list">
+                    <h3>To-Do List</h3>
+                    <ul>
+                        <li>Read Chapter 4 <button>Edit</button> <button>Delete</button></li>
+                    </ul>
+                    <input type="text" placeholder="Add new task"><button>Add</button>
+                </section>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="icons">
+                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="#" the="icon brands fa-instagram"><span the="label">Instagram</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled. All rights reserved.</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

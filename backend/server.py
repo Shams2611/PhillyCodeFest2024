@@ -1,9 +1,10 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from drowsy_detection_code import *
+from drowsy_detection_code.faceSentiment import DrowsyDetection
 
 app = Flask(__name__, static_url_path="/", static_folder="../")
 CORS(app)  # Enable CORS for all routes by default
+dd = DrowsyDetection()
 
 @app.route("/")
 def serve_index():
@@ -23,7 +24,8 @@ def upload_image():
 
     # Raw bytes
     data = image.stream.read()
-    print(dir(image))
+    dd.faceSentiBytesSrc(data)
+    # print(dir(image))
     return jsonify({'message': 'Image uploaded successfully'})
 
 if __name__ == "__main__":
