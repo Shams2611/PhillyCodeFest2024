@@ -47,6 +47,11 @@
 			display: flex;
 			gap: .25rem;
 		}
+		.right-row-img{
+			line-height: 1.5rem;
+			height: 1.5rem;
+			width: 1.5rem;
+		}
 
 		.right-row:hover {
 			background-color: lightgrey;
@@ -219,6 +224,20 @@
 		body {
 			font-family: "Roboto Slab";
 		}
+
+		.fa-circle-check{
+			color: var(--green);
+		}
+		.fa-circle-xmark{
+			color: var(--red);
+		}
+		.fa-solid, .fa-regular{
+			/* color: black; */
+		}
+		.feature-img{
+			height: 5rem;
+			width: 5rem;
+		}
 	</style>
 	<!-- <link rel="stylesheet" href="styles.css"> -->
 	<!-- leaflet css sheet -->
@@ -269,17 +288,52 @@
 
 		<!-- Banner -->
 		<section id="banner">
-			<h2>EqualEd</h2>
-			<p>Unlock your potential with personalized educational opportunities</p>
+			<h2 style="font-weight: bold;">EqualEd</h2>
+			<p>Unlock your potential with personalized educational opportunities.</p>
 			<ul class="actions special">
 				<li><a href="#" class="button primary">Get Started</a></li>
 			</ul>
 		</section>
+		
 
 		<!-- Main -->
 		<section id="main" class="container">
+			<section class="box special features">
+				<div class="features-row">
+					<section>
+						<!-- <span class="icon solid major fa-university accent2"></span> -->
+						<img class = "feature-img" src="images/markers/marker_studying.png">
+						<h3>Recommended Study Spaces</h3>
+						<p>Find quiet and inspiring places to study near you.</p>
+					</section>
+					<section>
+						<!-- <span class="icon solid major fa-user-graduate accent4"></span> -->
+						<img class = "feature-img" src="images/markers/marker_tutoring.png">
+
+						<h3>Tutoring & Mentorship</h3>
+						<p>Connect with mentors and tutors who can guide your academic journey.</p>
+					</section>
+				</div>
+				<div class="features-row">
+					<section>
+						<!-- <span class="icon solid major fa-briefcase accent5"></span> -->
+						<img class = "feature-img" src="images/markers/marker_career.png">
+						<h3>Career Guidance</h3>
+						<p>Receive advice and resources for building a successful career.</p>
+					</section>
+					<section>
+						<!-- <span class="icon solid major fa-book accent3"></span> -->
+						<img class = "feature-img" src="images/markers/marker_scholarship.png">
+						<h3>Scholarships</h3>
+						<p>Explore scholarship opportunities to fund your education.</p>
+					</section>
+				</div>
+			</section>
+		</section>
 
 			<!-- Opportunities Form -->
+			<section id="main" class="container">
+
 			<section class="box special">
 				<header class="major">
 					<h2>Find Opportunities Tailored for You</h2>
@@ -372,9 +426,9 @@
 						<div class="info-img"></div>
 						<!-- <img class="info-img" src="0525182029_HDR.jpg" alt=""> -->
 						<div class="right-header">
-							The Korman Center
+							<span id="locationNameLabel">The Korman Center</span>
 							<div class="star-row">
-								3.5
+								<!-- <span id="locationRatingLabel">3.5</span> -->
 								<div id="star1">
 									<i class="fa-solid fa-star" style="display: block;"></i>
 									<i class="fa-solid fa-star-half-stroke" style="display: none;"></i>
@@ -400,33 +454,38 @@
 									<i class="fa-solid fa-star-half-stroke" style="display: none;"></i>
 									<i class="fa-regular fa-star" style="display: block;"></i>
 								</div>
-								(74)
 							</div>
-							Studying Center
+							<span id="locationTypeLabel">Studying Center</span>
 						</div>
 						<div class="right-row">
-							Address:<span id="addressLabel">15 S 33rd St</span>
+							Address:<span id="locationAddressLabel">15 S 33rd St</span>
+						</div>
+						<div class="right-row">
+							Campus:<img class="right-row-img" src="images/icons/icon_drexel.png">
+							<!-- <span id="campusLabel">Drexel</span> -->
 						</div>
 						<div class="right-row">
 							Math:
-							<div class="prog-bar-container">
+							<img id="math-check" class = "right-row-img" src="images/icons/icon_check.png">
+							<img style="display: none;"id="math-x" class = "right-row-img" src="images/icons/icon_x.png">
+							<!-- <div class="prog-bar-container">
 								<div class="prog-bar-fill" style="width:100%"></div>
-							</div>
-							5/5
+							</div> -->
 						</div>
 						<div class="right-row">
 							Science:
-							<div class="prog-bar-container">
-								<div class="prog-bar-fill" style="width:60%"></div>
-							</div>
-							3/5
+							<img id="science-check"class = "right-row-img" src="images/icons/icon_check.png">
+							<img style="display: none;" id="science-x"class = "right-row-img" src="images/icons/icon_x.png">
 						</div>
 						<div class="right-row">
 							English:
-							<div class="prog-bar-container">
-								<div class="prog-bar-fill" style="width:40%"></div>
-							</div>
-							2/5
+							<img id="english-check" class = "right-row-img" src="images/icons/icon_check.png">
+							<img style="display:none;"id="english-x" class = "right-row-img" src="images/icons/icon_x.png">
+						</div>
+						<div class="right-row">
+							Arts:
+							<img style="display: none;"id="arts-check" class = "right-row-img" src="images/icons/icon_check.png">
+							<img id="arts-x" class = "right-row-img" src="images/icons/icon_x.png">
 						</div>
 					</div>
 				</div>
@@ -501,6 +560,7 @@
 				</div>
 			</section>
 		</section>
+	</section>
 
 		<!-- CTA -->
 		<section id="cta">
