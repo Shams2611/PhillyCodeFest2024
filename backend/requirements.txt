@@ -1,5 +1,3 @@
-psutil
-requests
 flask
 flask_cors
-uuid
+opencv-python
