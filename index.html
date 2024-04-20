@@ -19,7 +19,7 @@
 		}
 
 		.outer-container {
-			border: .5rem black solid;
+			border: 1rem white solid;
 			display: flex;
 			justify-content: space-between;
 		}
@@ -68,7 +68,7 @@
 			margin: .5rem;
 		}
 
-		.info-img {
+		#infoImg {
 			/* object-position: 100% 0%; */
 			height: 12rem;
 			width: 100%;
@@ -234,6 +234,10 @@
 		.fa-solid, .fa-regular{
 			/* color: black; */
 		}
+		.feature-img{
+			height: 5rem;
+			width: 5rem;
+		}
 	</style>
 	<!-- <link rel="stylesheet" href="styles.css"> -->
 	<!-- leaflet css sheet -->
@@ -284,8 +288,8 @@
 
 		<!-- Banner -->
 		<section id="banner">
-			<h2>EqualEd</h2>
-			<p>Unlock your potential with personalized educational opportunities</p>
+			<h2 style="font-weight: bold;">EqualEd</h2>
+			<p>Unlock your potential with personalized educational opportunities.</p>
 			<ul class="actions special">
 				<li><a href="#" class="button primary">Get Started</a></li>
 			</ul>
@@ -297,26 +301,31 @@
 			<section class="box special features">
 				<div class="features-row">
 					<section>
-						<span class="icon solid major fa-university accent2"></span>
+						<!-- <span class="icon solid major fa-university accent2"></span> -->
+						<img class = "feature-img" src="images/markers/marker_studying.png">
 						<h3>Recommended Study Spaces</h3>
 						<p>Find quiet and inspiring places to study near you.</p>
 					</section>
 					<section>
-						<span class="icon solid major fa-book accent3"></span>
-						<h3>Scholarships</h3>
-						<p>Explore scholarship opportunities to fund your education.</p>
+						<!-- <span class="icon solid major fa-user-graduate accent4"></span> -->
+						<img class = "feature-img" src="images/markers/marker_tutoring.png">
+
+						<h3>Tutoring & Mentorship</h3>
+						<p>Connect with mentors and tutors who can guide your academic journey.</p>
 					</section>
 				</div>
 				<div class="features-row">
 					<section>
-						<span class="icon solid major fa-user-graduate accent4"></span>
-						<h3>Tutoring & Mentorship</h3>
-						<p>Connect with mentors and tutors who can guide your academic journey.</p>
-					</section>
-					<section>
-						<span class="icon solid major fa-briefcase accent5"></span>
+						<!-- <span class="icon solid major fa-briefcase accent5"></span> -->
+						<img class = "feature-img" src="images/markers/marker_career.png">
 						<h3>Career Guidance</h3>
 						<p>Receive advice and resources for building a successful career.</p>
+					</section>
+					<section>
+						<!-- <span class="icon solid major fa-book accent3"></span> -->
+						<img class = "feature-img" src="images/markers/marker_scholarship.png">
+						<h3>Scholarships</h3>
+						<p>Explore scholarship opportunities to fund your education.</p>
 					</section>
 				</div>
 			</section>
@@ -331,16 +340,16 @@
 					<!-- <p>Please enter your information to receive personalized recommendations.</p> -->
 				</header>
 				<!-- <h3>Form</h3> -->
-				<form method="post" action="#">
+				<form method="post" id="information">
 					<div class="row gtr-uniform gtr-50">
 						<div class="col-6 col-12-mobilep">
 							<input type="text" name="name" id="name" value="" placeholder="Name:" />
 						</div>
 						<div class="col-6 col-12-mobilep">
-							<input type="email" name="age" id="email" value="" placeholder="Age:" />
+							<input type="text" name="age" id="email" value="" placeholder="Age:" />
 						</div>
 						<div class="col-12">
-							<select name="category" id="category">
+							<select name="gender" id="category">
 								<option value="">I identify as:</option>
 								<option value="gender_male">Male</option>
 								<option value="gender_female">Female</option>
@@ -348,7 +357,16 @@
 							</select>
 						</div>
 						<div class="col-12">
-							<select name="category" id="category">
+							<select name="school" id="category" selected="School:">
+								<option value="school_ccp">Community College of Philadelphia</option>
+								<option value="school_drexel">Drexel University</option>
+								<option value="school_temple">Temple University</option>
+								<option value="school_upenn">University of Pennsylvania</option>
+								<option value="school_none">None</option>
+							</select>
+						</div>
+						<div class="col-12">
+							<select name="subject" id="category">
 								<option value="">I need help studying:</option>
 								<option value="study_math">Math</option>
 								<option value="study_science">Science</option>
@@ -414,7 +432,7 @@
 						</div>
 					</div>
 					<div class="half right-half">
-						<div class="info-img"></div>
+						<div id="infoImg"></div>
 						<!-- <img class="info-img" src="0525182029_HDR.jpg" alt=""> -->
 						<div class="right-header">
 							<span id="locationNameLabel">The Korman Center</span>
@@ -451,9 +469,8 @@
 						<div class="right-row">
 							Address:<span id="locationAddressLabel">15 S 33rd St</span>
 						</div>
-						<div class="right-row">
-							Campus:<img class="right-row-img" src="images/icons/icon_drexel.png">
-							<!-- <span id="campusLabel">Drexel</span> -->
+						<div id="campusRow" class="right-row">
+							Campus:<span id="locationCampusLabel">Drexel</span>
 						</div>
 						<div class="right-row">
 							Math:
@@ -521,14 +538,13 @@
 					</div>
 				</div>
 			</section>
-			<br>
+			<!-- <br> -->
 			<!-- Recommendations -->
-			<!-- This section can be dynamically filled with content after form submission, handled by JavaScript or server-side logic -->
 		</section>
 	</section>
 
 		<!-- CTA -->
-		<section id="cta">
+		<section id="cta" style="background-color: #006266;">
 
 			<h2>Sign up for beta access</h2>
 			<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
@@ -547,13 +563,13 @@
 		</section>
 
 		<!-- Footer -->
-		<footer id="footer" height: 100px>
+		<!-- <footer id="footer" height: 100px>
 
 			<ul class="copyright">
 				<li>&copy; Untitled. All rights reserved.</li>
 				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 			</ul>
-		</footer>
+		</footer> -->
 
 	</div>
 
