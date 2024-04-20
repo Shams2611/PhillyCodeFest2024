@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Camera Image Capture</title>
+</head>
+<body>
+  <h1>Camera Image Capture</h1>
+  <video id="videoElement" autoplay></video>
+  <canvas id="canvasElement" style="display: none;"></canvas>
+
+  <script>
+    const videoElement = document.getElementById('videoElement');
+    const canvasElement = document.getElementById('canvasElement');
+    const canvasContext = canvasElement.getContext('2d');
+
+    // Access the user's camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function(stream) {
+        videoElement.srcObject = stream;
+        startCapturingImages();
+      })
+      .catch(function(error) {
+        console.log('Error accessing camera:', error);
+      });
+
+    function startCapturingImages() {
+      setInterval(function() {
+        // Capture an image from the video stream
+        canvasElement.width = videoElement.videoWidth;
+        canvasElement.height = videoElement.videoHeight;
+        canvasContext.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+        // Convert the captured image to a Blob
+        canvasElement.toBlob(function(blob) {
+          // Create a FormData object to send the image
+          const formData = new FormData();
+          formData.append('image', blob, 'image.png');
+
+          // Send the image to the Flask backend
+          fetch('/upload-image', {
+            method: 'POST',
+            body: formData
+          })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Image uploaded successfully:', data);
+            })
+            .catch(error => {
+              console.log('Error uploading image:', error);
+            });
+        }, 'image/png');
+      }, 1000); // Capture an image every 1000 milliseconds (1 second)
+    }
+  </script>
+</body>
+</html>
