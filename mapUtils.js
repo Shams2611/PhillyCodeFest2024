@@ -55,6 +55,12 @@ function calculateDistance(coord1, coord2) {
 let locationNameLabel = document.getElementById("locationNameLabel")
 let locationTypeLabel = document.getElementById("locationTypeLabel")
 let locationAddressLabel = document.getElementById("locationAddressLabel")
+let infoImg = document.getElementById("infoImg")
+
+let campusRow = document.getElementById("campusRow")
+let locationCampusLabel = document.getElementById("locationCampusLabel")
+
+// console.log(infoImg)
 
 function addRandomOffset(coordinates) {
     return coordinates.map(([x, y]) => [
@@ -72,6 +78,9 @@ function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+let i = 0
+let ind = 0
+
 function getData() {
     const xhttp = new XMLHttpRequest();
     xhttp.responseType = "json";
@@ -84,7 +93,6 @@ function getData() {
             stuff.forEach((thing) => {
                 const [latStr, longStr] = thing.coords.slice(1, -1).split(',');
 
-                // Convert latitude and longitude strings to numbers
                 const latitude = parseFloat(latStr);
                 const longitude = parseFloat(longStr);
 
@@ -110,10 +118,12 @@ function getData() {
                 // if(dist > 5){
                 //     ind+=4
                 // }
+                // console.log("-"+coords+"-"+i++)
                 var newMarker = new L.marker(coords, { icon: iconsList[ind] })
                 markers[ind].push(newMarker)
                 newMarker.addTo(map).on("click", function (e) {
-                    routeToPoint(coords, markerColors[ind % 4])
+                    console.log(ind)
+                    routeToPoint(coords, markerColors[ind])
                     validateCheck("math", thing.math)
                     validateCheck("science", thing.science)
                     validateCheck("english", thing.english)
@@ -124,6 +134,7 @@ function getData() {
                     for(let i = 0; i<5; i++){
                         evaluateStar(thing.rating, i)
                     }
+                    infoImg.style = "background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url('"+thing.cover+"')";
                 })
             })
         }
