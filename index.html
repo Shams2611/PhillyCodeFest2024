@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Educational Opportunities Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="landing is-preload">
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header" class="alt">
+            <h1><a href="index.html">Opportunity Finder</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="study_planner.html">Study Planner</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Banner -->
+        <section id="banner">
+            <h2>EqualEd</h2>
+            <p>Unlock your potential with personalized educational opportunities</p>
+            <ul class="actions special">
+                <li><a href="#" class="button primary">Get Started</a></li>
+            </ul>
+        </section>
+
+        <!-- Main -->
+        <section id="main" class="container">
+
+            <!-- Opportunities Form -->
+            <section class="box special">
+                <header class="major">
+                    <h2>Find Opportunities Tailored for You</h2>
+                    <p>Please enter your information to receive personalized recommendations.</p>
+                </header>
+				<h3>Form</h3>
+				<form method="post" action="#">
+					<div class="row gtr-uniform gtr-50">
+						<div class="col-6 col-12-mobilep">
+							<input type="text" name="name" id="name" value="" placeholder="Name" />
+						</div>
+						<div class="col-6 col-12-mobilep">
+							<input type="email" name="age" id="email" value="" placeholder="Age" />
+						</div>
+						<div class="col-12">
+							<select name="category" id="category">
+								<option value="">- Select a Category -</option>
+								<option value="study_spaces">Study Spaces</option>
+								<option value="scholarships">Scholarships</option>
+								<option value="tutoring_and_mentorship">Tutoring and Mentorship Programs</option>
+								<option value="career_guidance">Career Guidance and Internship Opportunities</option>
+							</select>
+							
+						</div>
+						<div class="col-4 col-12-narrower">
+							<input type="radio" id="priority-low" name="priority" checked>
+							<label for="priority-low">Low Priority</label>
+						</div>
+						<div class="col-4 col-12-narrower">
+							<input type="radio" id="priority-normal" name="priority">
+							<label for="priority-normal">Normal Priority</label>
+						</div>
+						<div class="col-4 col-12-narrower">
+							<input type="radio" id="priority-high" name="priority">
+							<label for="priority-high">High Priority</label>
+						</div>
+						<div class="col-6 col-12-narrower">
+							<input type="checkbox" id="copy" name="copy">
+							<label for="copy">Gender-Inclusive</label>
+						</div>
+						<div class="col-6 col-12-narrower">
+							<input type="checkbox" id="human" name="human" checked>
+							<label for="human">Friendly</label>
+						</div>
+						<div class="col-12">
+							<textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea>
+						</div>
+						<div class="col-12">
+							<ul class="actions">
+								<li><input type="submit" value="Send Message" /></li>
+								<li><input type="reset" value="Reset" class="alt" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+
+				<hr />
+
+				<form method="post" action="#">
+					<div class="row gtr-uniform gtr-50">
+						<div class="col-9 col-12-mobilep">
+							<input type="text" name="query" id="query" value="" placeholder="Query" />
+						</div>
+						<div class="col-3 col-12-mobilep">
+							<input type="submit" value="Search" class="fit" />
+						</div>
+					</div>
+				</form>
+            </section>
+
+            <!-- Recommendations -->
+            <!-- This section can be dynamically filled with content after form submission, handled by JavaScript or server-side logic -->
+            <section class="box special features">
+                <div class="features-row">
+                    <section>
+                        <span class="icon solid major fa-university accent2"></span>
+                        <h3>Recommended Study Spaces</h3>
+                        <p>Find quiet and inspiring places to study near you.</p>
+                    </section>
+                    <section>
+                        <span class="icon solid major fa-book accent3"></span>
+                        <h3>Scholarships</h3>
+                        <p>Explore scholarship opportunities to fund your education.</p>
+                    </section>
+                </div>
+                <div class="features-row">
+                    <section>
+                        <span class="icon solid major fa-user-graduate accent4"></span>
+                        <h3>Tutoring & Mentorship</h3>
+                        <p>Connect with mentors and tutors who can guide your academic journey.</p>
+                    </section>
+                    <section>
+                        <span class="icon solid major fa-briefcase accent5"></span>
+                        <h3>Career Guidance</h3>
+                        <p>Receive advice and resources for building a successful career.</p>
+                    </section>
+                </div>
+            </section>
+        </section>
+
+			<!-- CTA -->
+				<section id="cta">
+
+					<h2>Sign up for beta access</h2>
+					<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
+
+					<form>
+						<div class="row gtr-50 gtr-uniform">
+							<div class="col-8 col-12-mobilep">
+								<input type="email" name="email" id="email" placeholder="Email Address" />
+							</div>
+							<div class="col-4 col-12-mobilep">
+								<input type="submit" value="Sign Up" class="fit" />
+							</div>
+						</div>
+					</form>
+
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer" height: 100px>
+					
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
