@@ -47,6 +47,11 @@
 			display: flex;
 			gap: .25rem;
 		}
+		.right-row-img{
+			line-height: 1.5rem;
+			height: 1.5rem;
+			width: 1.5rem;
+		}
 
 		.right-row:hover {
 			background-color: lightgrey;
@@ -218,6 +223,16 @@
 
 		body {
 			font-family: "Roboto Slab";
+		}
+
+		.fa-circle-check{
+			color: var(--green);
+		}
+		.fa-circle-xmark{
+			color: var(--red);
+		}
+		.fa-solid, .fa-regular{
+			/* color: black; */
 		}
 	</style>
 	<!-- <link rel="stylesheet" href="styles.css"> -->
@@ -402,9 +417,9 @@
 						<div class="info-img"></div>
 						<!-- <img class="info-img" src="0525182029_HDR.jpg" alt=""> -->
 						<div class="right-header">
-							The Korman Center
+							<span id="locationNameLabel">The Korman Center</span>
 							<div class="star-row">
-								3.5
+								<!-- <span id="locationRatingLabel">3.5</span> -->
 								<div id="star1">
 									<i class="fa-solid fa-star" style="display: block;"></i>
 									<i class="fa-solid fa-star-half-stroke" style="display: none;"></i>
@@ -430,33 +445,38 @@
 									<i class="fa-solid fa-star-half-stroke" style="display: none;"></i>
 									<i class="fa-regular fa-star" style="display: block;"></i>
 								</div>
-								(74)
 							</div>
-							Studying Center
+							<span id="locationTypeLabel">Studying Center</span>
 						</div>
 						<div class="right-row">
-							Address:<span id="addressLabel">15 S 33rd St</span>
+							Address:<span id="locationAddressLabel">15 S 33rd St</span>
+						</div>
+						<div class="right-row">
+							Campus:<img class="right-row-img" src="images/icons/icon_drexel.png">
+							<!-- <span id="campusLabel">Drexel</span> -->
 						</div>
 						<div class="right-row">
 							Math:
-							<div class="prog-bar-container">
+							<img id="math-check" class = "right-row-img" src="images/icons/icon_check.png">
+							<img style="display: none;"id="math-x" class = "right-row-img" src="images/icons/icon_x.png">
+							<!-- <div class="prog-bar-container">
 								<div class="prog-bar-fill" style="width:100%"></div>
-							</div>
-							5/5
+							</div> -->
 						</div>
 						<div class="right-row">
 							Science:
-							<div class="prog-bar-container">
-								<div class="prog-bar-fill" style="width:60%"></div>
-							</div>
-							3/5
+							<img id="science-check"class = "right-row-img" src="images/icons/icon_check.png">
+							<img style="display: none;" id="science-x"class = "right-row-img" src="images/icons/icon_x.png">
 						</div>
 						<div class="right-row">
 							English:
-							<div class="prog-bar-container">
-								<div class="prog-bar-fill" style="width:40%"></div>
-							</div>
-							2/5
+							<img id="english-check" class = "right-row-img" src="images/icons/icon_check.png">
+							<img style="display:none;"id="english-x" class = "right-row-img" src="images/icons/icon_x.png">
+						</div>
+						<div class="right-row">
+							Arts:
+							<img style="display: none;"id="arts-check" class = "right-row-img" src="images/icons/icon_check.png">
+							<img id="arts-x" class = "right-row-img" src="images/icons/icon_x.png">
 						</div>
 					</div>
 				</div>
