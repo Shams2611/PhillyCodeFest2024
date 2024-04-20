@@ -8,7 +8,7 @@ let container = document.getElementById("mapContainer")
 // var startCoords = [39.9596, -75.1904] //millenium 
 var startCoords = [39.95666455911189, -75.19516684736305] //cci
 
-let map = L.map(container).setView(startCoords, 10);
+let map = L.map(container).setView(startCoords, 14);
 let osmLayer = L.tileLayer('https://api.maptiler.com/maps/basic-v2-light/{z}/{x}/{y}.png?key=itORzsoRJTMoPJkSZRLH', {
     attribution: '<a href="http://osm.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
@@ -91,8 +91,8 @@ function getData() {
                 var coords = [latitude + (Math.floor(Math.random() * 11) - 5) * 0.0001, longitude + (Math.floor(Math.random() * 11) - 5) * 0.0001]
                 var dist = calculateDistance(startCoords, coords)
                 //change these lines to make the icon different
-                var ind = Math.min(Math.floor(dist / 2.5), 3);
-                var ind = getRandomNumber(0, 3)
+                // var ind = Math.min(Math.floor(dist / 2.5), 3);
+                // var ind = getRandomNumber(0, 3)
                 switch (thing.type) {
                     case "study":
                         ind = 0;
@@ -119,7 +119,7 @@ function getData() {
                     validateCheck("english", thing.english)
                     validateCheck("arts", thing.arts)
                     locationNameLabel.innerText = thing.name
-                    locationTypeLabel.innerText = thing.type
+                    locationTypeLabel.innerText = capitalizeWords(thing.type)
                     locationAddressLabel.innerText = thing.address
                     for(let i = 0; i<5; i++){
                         evaluateStar(thing.rating, i)
@@ -131,6 +131,16 @@ function getData() {
     //   xhttp.open('GET', 'https://birdwatch-6f587-default-rtdb.firebaseio.com/.json');
     xhttp.open('GET', 'https://studyspaces-96140-default-rtdb.firebaseio.com/.json');
     xhttp.send();
+}
+
+function capitalizeWords(str) {
+    let words = str.split(' ');
+
+    for (let i = 0; i < words.length; i++) {
+        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    }
+
+    return words.join(' ');
 }
 
 function validateCheck(name, val) {
@@ -165,10 +175,6 @@ function evaluateStar(rating, index) {
     else{
         children[2].style = "display: block;"
     }
-    // const children = divElement.children;
-    // for (let i = 0; i < children.length; i++) {
-    //     children[i].style.display = "none";
-    // }
 }
 
 getData()
@@ -191,7 +197,6 @@ function showMarkers(ind) {
     console.log(markers[ind])
     markers[ind].forEach((element, i) => {
         setTimeout(() => {
-            // map.removeLayer(element)
             map.addLayer(element)
         }, 20 * i);
     })
@@ -244,7 +249,7 @@ function handleMapPreference(checkbox) {
         case "study":
             checkbox.checked ? showMarkers(0) : hideMarkers(0)
             break;
-        case "tutoring":
+        case "tutor":
             checkbox.checked ? showMarkers(1) : hideMarkers(1)
             break;
         case "career":
