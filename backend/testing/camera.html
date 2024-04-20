@@ -7,7 +7,7 @@
   <h1>Camera Image Capture</h1>
   <video id="videoElement" autoplay></video>
   <canvas id="canvasElement" style="display: none;"></canvas>
-
+  <span id="num"></span>
   <script>
     const videoElement = document.getElementById('videoElement');
     const canvasElement = document.getElementById('canvasElement');
@@ -43,7 +43,7 @@
           })
             .then(response => response.json())
             .then(data => {
-              console.log('Image uploaded successfully:', data);
+              document.getElementById("num").textContent = data.count;
             })
             .catch(error => {
               console.log('Error uploading image:', error);
@@ -52,5 +52,6 @@
       }, 1000); // Capture an image every 1000 milliseconds (1 second)
     }
   </script>
+<p></p>
 </body>
 </html>

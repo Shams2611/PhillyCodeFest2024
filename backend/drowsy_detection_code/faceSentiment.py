@@ -22,23 +22,25 @@ class DrowsyDetection:
     def faceSentiBytesSrc(self, source):
         detect = self.__recog.detect_faces(Image={'Bytes':source},Attributes=['ALL'])
         try:
-            emodict = [detect['FaceDetails'][0]['Landmarks'][0],detect['FaceDetails'][0]['Landmarks'][1]]
-            pprint.pp(emodict)
-            '''if (emodict['Value']==False and emodict['Confidence']>96) or (emodict['Value']==True and emodict['Confidence']<70):
-                #print(emodict)
-                count.changeC(1)
-                #print(count.returnC())
-            
+            emodict = detect['FaceDetails'][0]['EyesOpen']
             emotest = detect['FaceDetails'][0]['Emotions'] 
             max = {'Type':None,'Confidence':0}
             for i in emotest:
                 if i['Confidence']>max['Confidence']:
                     max = i
-            #print(max)'''
+            print(max)
+            #pprint.pp(emodict)
+            if (emodict['Value']==False and emodict['Confidence']>96) or (emodict['Value']==True and emodict['Confidence']<70) and (max["Type"] or max['Type']=="CALM"):
+                #print(emodict)
+                self.__count.changeC(1)
+                print(self.__count.returnC())
+            
+            
         except IndexError:
             pass
-    
-
+        
+    def getCount(self):
+        return self.__count.returnC()
 
 # count = Counter(0)
 """
