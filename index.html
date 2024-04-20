@@ -19,7 +19,7 @@
 		}
 
 		.outer-container {
-			border: .5rem black solid;
+			border: 1rem white solid;
 			display: flex;
 			justify-content: space-between;
 		}
@@ -68,7 +68,7 @@
 			margin: .5rem;
 		}
 
-		.info-img {
+		#infoImg {
 			/* object-position: 100% 0%; */
 			height: 12rem;
 			width: 100%;
@@ -423,7 +423,7 @@
 						</div>
 					</div>
 					<div class="half right-half">
-						<div class="info-img"></div>
+						<div id="infoImg"></div>
 						<!-- <img class="info-img" src="0525182029_HDR.jpg" alt=""> -->
 						<div class="right-header">
 							<span id="locationNameLabel">The Korman Center</span>
@@ -460,9 +460,8 @@
 						<div class="right-row">
 							Address:<span id="locationAddressLabel">15 S 33rd St</span>
 						</div>
-						<div class="right-row">
-							Campus:<img class="right-row-img" src="images/icons/icon_drexel.png">
-							<!-- <span id="campusLabel">Drexel</span> -->
+						<div id="campusRow" class="right-row">
+							Campus:<span id="locationCampusLabel">Drexel</span>
 						</div>
 						<div class="right-row">
 							Math:
@@ -530,40 +529,13 @@
 					</div>
 				</div>
 			</section>
-			<br>
+			<!-- <br> -->
 			<!-- Recommendations -->
-			<!-- This section can be dynamically filled with content after form submission, handled by JavaScript or server-side logic -->
-			<section class="box special features">
-				<div class="features-row">
-					<section>
-						<span class="icon solid major fa-university accent2"></span>
-						<h3>Recommended Study Spaces</h3>
-						<p>Find quiet and inspiring places to study near you.</p>
-					</section>
-					<section>
-						<span class="icon solid major fa-book accent3"></span>
-						<h3>Scholarships</h3>
-						<p>Explore scholarship opportunities to fund your education.</p>
-					</section>
-				</div>
-				<div class="features-row">
-					<section>
-						<span class="icon solid major fa-user-graduate accent4"></span>
-						<h3>Tutoring & Mentorship</h3>
-						<p>Connect with mentors and tutors who can guide your academic journey.</p>
-					</section>
-					<section>
-						<span class="icon solid major fa-briefcase accent5"></span>
-						<h3>Career Guidance</h3>
-						<p>Receive advice and resources for building a successful career.</p>
-					</section>
-				</div>
-			</section>
 		</section>
 	</section>
 
 		<!-- CTA -->
-		<section id="cta">
+		<section id="cta" style="background-color: #006266;">
 
 			<h2>Sign up for beta access</h2>
 			<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
@@ -582,13 +554,13 @@
 		</section>
 
 		<!-- Footer -->
-		<footer id="footer" height: 100px>
+		<!-- <footer id="footer" height: 100px>
 
 			<ul class="copyright">
 				<li>&copy; Untitled. All rights reserved.</li>
 				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 			</ul>
-		</footer>
+		</footer> -->
 
 	</div>
 
