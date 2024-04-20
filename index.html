@@ -1,69 +1,324 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-    <title>Educational Opportunities Dashboard</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+	<title>Educational Opportunities Dashboard</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<style>
+		:root {
+			--yellow: #FFC312;
+			--yellow2: #F79F1F;
+			--blue: #12CBC4;
+			--blue2: #1289A7;
+			--red: #EE5A24;
+			--red2: #EA2027;
+			--green: #C4E538;
+			--green2: #A3CB38;
+		}
+
+		.outer-container {
+			border: .5rem black solid;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.half {
+			flex: 1;
+		}
+
+		.right-half {
+			/* background-color: blue; */
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+			max-width: 20rem;
+		}
+
+		.right-row {
+			transition: .5s;
+			width: 100%;
+			/* margin: .25rem; */
+			padding: .5rem;
+			/* border-top-left-radius: .5rem;
+            border-bottom-left-radius: .5rem; */
+			line-height: 1.5rem;
+			display: flex;
+			gap: .25rem;
+		}
+
+		.right-row:hover {
+			background-color: lightgrey;
+		}
+
+		.right-header {
+			width: 100%;
+			padding: .5rem;
+		}
+
+		#mapPlaceholder {
+			height: 10rem;
+			/* background-color: green; */
+			margin: .5rem;
+		}
+
+		.info-img {
+			/* object-position: 100% 0%; */
+			height: 12rem;
+			width: 100%;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url("0525182029_HDR.jpg");
+			/* object-fit: cover; */
+			background-size: cover;
+			background-position: 100% 50%;
+		}
+
+		.star-row {
+			margin: .25rem;
+			display: flex;
+			gap: .25rem;
+		}
+
+		.fa-star,
+		.fa-star-half-stroke {
+			/* color: orange; */
+			color: var(--yellow);
+		}
+
+		.prog-bar-container {
+			width: 5rem;
+			height: .5rem;
+			background-color: gray;
+			border-radius: 1rem;
+			margin-top: .5rem;
+		}
+
+		.prog-bar-fill {
+			background-color: var(--yellow);
+			border-radius: 1rem;
+			height: .5rem;
+			transition: width 2s;
+		}
+
+		.checkbox-wrapper-64 input[type="checkbox"] {
+			visibility: hidden;
+			display: none;
+		}
+
+		.checkbox-wrapper-64 *,
+		.checkbox-wrapper-64 ::after,
+		.checkbox-wrapper-64 ::before {
+			box-sizing: border-box;
+		}
+
+		.checkbox-wrapper-64 .switch {
+			position: relative;
+			display: inline-block;
+			width: 2.5em;
+			height: 1.5em;
+			line-height: 1.5em;
+		}
+
+		.checkbox-wrapper-64 .switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.checkbox-wrapper-64 .slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: var(--red);
+			transition: .4s;
+			border-radius: 30px;
+		}
+
+		.checkbox-wrapper-64 .slider:before {
+			position: absolute;
+			content: "";
+			height: 1em;
+			width: 1em;
+			border-radius: 20px;
+			left: 0.27em;
+			bottom: 0.25em;
+			background-color: white;
+			transition: .4s;
+		}
+
+		.checkbox-wrapper-64 input:checked+.slider {
+			background-color: var(--green);
+		}
+
+		.checkbox-wrapper-64 input:checked+.slider:before {
+			transform: translateX(.9em);
+			background-color: white;
+		}
+
+		.map-options {
+			margin: 1rem;
+		}
+
+		.map-option {
+			display: flex;
+			gap: .25rem;
+			line-height: 1.5rem;
+		}
+
+		@media (width < 50rem) {
+			.outer-container {
+				flex-direction: column;
+			}
+
+			.right-half {
+				max-width: none;
+			}
+		}
+
+		#outBtn,
+		#resetBtn,
+		#inBtn {
+			background-color: var(--blue);
+		}
+
+		#map {
+			height: 300px;
+			width: 300px;
+			/* width: 50%; */
+		}
+
+		button {
+			border: 0px;
+			background-color: var(--blue);
+			color: white;
+			padding: .25rem;
+			border-radius: .25rem;
+			height: 1.5rem;
+			width: 1.5rem;
+		}
+
+		.leaflet-routing-container {
+			background-color: var(--blue);
+		}
+
+		.leaflet-control-zoom {
+			visibility: hidden;
+		}
+
+		.l-overlay {
+			background-color: #ffffffc3;
+			padding: .5rem;
+			border-radius: .5rem;
+			display: flex;
+			gap: .25rem;
+		}
+
+		body {
+			font-family: "Roboto Slab";
+		}
+	</style>
+	<!-- <link rel="stylesheet" href="styles.css"> -->
+	<!-- leaflet css sheet -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+	<!-- leaflet js script -->
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+		integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	<!-- turf js script -->
+	<script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+	<!-- font awesome -->
+	<script src="https://kit.fontawesome.com/2b9cdc1c9a.js" crossorigin="anonymous"></script>
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- leaflet routing scripts -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+	<!-- simple icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/siimple-icons/siimple-icons.css" />
+	<!-- roboto mono -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+		rel="stylesheet">
+	<!-- roboto slab -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap"
+		rel="stylesheet">
 </head>
+
 <body class="landing is-preload">
-    <div id="page-wrapper">
+	<div id="page-wrapper">
 
-        <!-- Header -->
-        <header id="header" class="alt">
-            <h1><a href="index.html">Opportunity Finder</a></h1>
-            <nav id="nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="study_planner.html">Study Planner</a></li>
-                </ul>
-            </nav>
-        </header>
+		<!-- Header -->
+		<header id="header" class="alt">
+			<h1><a href="index.html">Opportunity Finder</a></h1>
+			<nav id="nav">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="study_planner.html">Study Planner</a></li>
+				</ul>
+			</nav>
+		</header>
 
-        <!-- Banner -->
-        <section id="banner">
-            <h2>EqualEd</h2>
-            <p>Unlock your potential with personalized educational opportunities</p>
-            <ul class="actions special">
-                <li><a href="#" class="button primary">Get Started</a></li>
-            </ul>
-        </section>
+		<!-- Banner -->
+		<section id="banner">
+			<h2>EqualEd</h2>
+			<p>Unlock your potential with personalized educational opportunities</p>
+			<ul class="actions special">
+				<li><a href="#" class="button primary">Get Started</a></li>
+			</ul>
+		</section>
 
-        <!-- Main -->
-        <section id="main" class="container">
+		<!-- Main -->
+		<section id="main" class="container">
 
-            <!-- Opportunities Form -->
-            <section class="box special">
-                <header class="major">
-                    <h2>Find Opportunities Tailored for You</h2>
-                    <p>Please enter your information to receive personalized recommendations.</p>
-                </header>
-				<h3>Form</h3>
+			<!-- Opportunities Form -->
+			<section class="box special">
+				<header class="major">
+					<h2>Find Opportunities Tailored for You</h2>
+					<!-- <p>Please enter your information to receive personalized recommendations.</p> -->
+				</header>
+				<!-- <h3>Form</h3> -->
 				<form method="post" action="#">
 					<div class="row gtr-uniform gtr-50">
 						<div class="col-6 col-12-mobilep">
-							<input type="text" name="name" id="name" value="" placeholder="Name" />
+							<input type="text" name="name" id="name" value="" placeholder="Name:" />
 						</div>
 						<div class="col-6 col-12-mobilep">
-							<input type="email" name="age" id="email" value="" placeholder="Age" />
+							<input type="email" name="age" id="email" value="" placeholder="Age:" />
 						</div>
 						<div class="col-12">
 							<select name="category" id="category">
-								<option value="">- Select a Category -</option>
-								<option value="study_spaces">Study Spaces</option>
-								<option value="scholarships">Scholarships</option>
-								<option value="tutoring_and_mentorship">Tutoring and Mentorship Programs</option>
-								<option value="career_guidance">Career Guidance and Internship Opportunities</option>
+								<option value="">I identify as:</option>
+								<option value="gender_male">Male</option>
+								<option value="gender_female">Female</option>
+								<option value="gender_other">Another gender identity</option>
 							</select>
-							
 						</div>
-						<div class="col-4 col-12-narrower">
+						<div class="col-12">
+							<select name="category" id="category">
+								<option value="">I need help studying:</option>
+								<option value="study_math">Math</option>
+								<option value="study_science">Science</option>
+								<option value="study_english">English</option>
+								<option value="study_arts">Arts</option>
+								<option value="study_none">None</option>
+							</select>
+						</div>
+						<!-- <div class="col-4 col-12-narrower">
 							<input type="radio" id="priority-low" name="priority" checked>
-							<label for="priority-low">Low Priority</label>
+							<label for="priority-low">I identify as male</label>
 						</div>
 						<div class="col-4 col-12-narrower">
 							<input type="radio" id="priority-normal" name="priority">
-							<label for="priority-normal">Normal Priority</label>
+							<label for="priority-normal">I identify as female</label>
 						</div>
 						<div class="col-4 col-12-narrower">
 							<input type="radio" id="priority-high" name="priority">
@@ -72,17 +327,18 @@
 						<div class="col-6 col-12-narrower">
 							<input type="checkbox" id="copy" name="copy">
 							<label for="copy">Gender-Inclusive</label>
-						</div>
-						<div class="col-6 col-12-narrower">
+						</div> -->
+						<!-- <div class="col-6 col-12-narrower">
 							<input type="checkbox" id="human" name="human" checked>
 							<label for="human">Friendly</label>
-						</div>
+						</div> -->
 						<div class="col-12">
-							<textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea>
+							<textarea name="message" id="message" placeholder="Additional information"
+								rows="6"></textarea>
 						</div>
 						<div class="col-12">
 							<ul class="actions">
-								<li><input type="submit" value="Send Message" /></li>
+								<li><input type="submit" value="Find opportunities" /></li>
 								<li><input type="reset" value="Reset" class="alt" /></li>
 							</ul>
 						</div>
@@ -101,75 +357,190 @@
 						</div>
 					</div>
 				</form>
-            </section>
+			</section>
 
-            <!-- Recommendations -->
-            <!-- This section can be dynamically filled with content after form submission, handled by JavaScript or server-side logic -->
-            <section class="box special features">
-                <div class="features-row">
-                    <section>
-                        <span class="icon solid major fa-university accent2"></span>
-                        <h3>Recommended Study Spaces</h3>
-                        <p>Find quiet and inspiring places to study near you.</p>
-                    </section>
-                    <section>
-                        <span class="icon solid major fa-book accent3"></span>
-                        <h3>Scholarships</h3>
-                        <p>Explore scholarship opportunities to fund your education.</p>
-                    </section>
-                </div>
-                <div class="features-row">
-                    <section>
-                        <span class="icon solid major fa-user-graduate accent4"></span>
-                        <h3>Tutoring & Mentorship</h3>
-                        <p>Connect with mentors and tutors who can guide your academic journey.</p>
-                    </section>
-                    <section>
-                        <span class="icon solid major fa-briefcase accent5"></span>
-                        <h3>Career Guidance</h3>
-                        <p>Receive advice and resources for building a successful career.</p>
-                    </section>
-                </div>
-            </section>
-        </section>
-
-			<!-- CTA -->
-				<section id="cta">
-
-					<h2>Sign up for beta access</h2>
-					<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
-
-					<form>
-						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
-								<input type="email" name="email" id="email" placeholder="Email Address" />
+			<section class="container">
+				<div class="outer-container">
+					<div class="half left-half">
+						<div id="mapContainer" style="height: 100%;">
+							<div id="map">
 							</div>
-							<div class="col-4 col-12-mobilep">
-								<input type="submit" value="Sign Up" class="fit" />
-							</div>
+
 						</div>
-					</form>
+					</div>
+					<div class="half right-half">
+						<div class="info-img"></div>
+						<!-- <img class="info-img" src="0525182029_HDR.jpg" alt=""> -->
+						<div class="right-header">
+							The Korman Center
+							<div class="star-row">
+								3.5
+								<div id="star1">
+									<i class="fa-solid fa-star" style="display: block;"></i>
+									<i class="fa-solid fa-star-half-stroke" style="display: none;"></i>
+									<i class="fa-regular fa-star" style="display: none;"></i>
+								</div>
+								<div id="star2">
+									<i class="fa-solid fa-star" style="display: block;"></i>
+									<i class="fa-solid fa-star-half-stroke" style="display: none;"></i>
+									<i class="fa-regular fa-star" style="display: none;"></i>
+								</div>
+								<div id="star3">
+									<i class="fa-solid fa-star" style="display: block;"></i>
+									<i class="fa-solid fa-star-half-stroke" style="display: none;"></i>
+									<i class="fa-regular fa-star" style="display: none;"></i>
+								</div>
+								<div id="star4">
+									<i class="fa-solid fa-star" style="display: none;"></i>
+									<i class="fa-solid fa-star-half-stroke" style="display: block;"></i>
+									<i class="fa-regular fa-star" style="display: none;"></i>
+								</div>
+								<div id="star5">
+									<i class="fa-solid fa-star" style="display: none;"></i>
+									<i class="fa-solid fa-star-half-stroke" style="display: none;"></i>
+									<i class="fa-regular fa-star" style="display: block;"></i>
+								</div>
+								(74)
+							</div>
+							Studying Center
+						</div>
+						<div class="right-row">
+							Address:<span id="addressLabel">15 S 33rd St</span>
+						</div>
+						<div class="right-row">
+							Math:
+							<div class="prog-bar-container">
+								<div class="prog-bar-fill" style="width:100%"></div>
+							</div>
+							5/5
+						</div>
+						<div class="right-row">
+							Science:
+							<div class="prog-bar-container">
+								<div class="prog-bar-fill" style="width:60%"></div>
+							</div>
+							3/5
+						</div>
+						<div class="right-row">
+							English:
+							<div class="prog-bar-container">
+								<div class="prog-bar-fill" style="width:40%"></div>
+							</div>
+							2/5
+						</div>
+					</div>
+				</div>
+				<div class="outer-container" style="border-top: 0;">
+					<div class="map-options">
+						<div class="map-option">
+							<div class="checkbox-wrapper-64">
+								<label class="switch">
+									<input type="checkbox" value="study" checked>
+									<span class="slider"></span>
+								</label>
+							</div>
+							Study Spaces
+						</div>
+						<div class="map-option">
+							<div class="checkbox-wrapper-64">
+								<label class="switch">
+									<input type="checkbox" value="tutoring" checked>
+									<span class="slider"></span>
+								</label>
+							</div>
+							Tutoring & Mentorship
+						</div>
+						<div class="map-option">
+							<div class="checkbox-wrapper-64">
+								<label class="switch">
+									<input type="checkbox" value="career" checked>
+									<span class="slider"></span>
+								</label>
+							</div>
+							Career Guidance & Internship
+						</div>
+						<div class="map-option">
+							<div class="checkbox-wrapper-64">
+								<label class="switch">
+									<input type="checkbox" value="scholarship" checked>
+									<span class="slider"></span>
+								</label>
+							</div>
+							Scholarships
+						</div>
+					</div>
+				</div>
+			</section>
+			<br>
+			<!-- Recommendations -->
+			<!-- This section can be dynamically filled with content after form submission, handled by JavaScript or server-side logic -->
+			<section class="box special features">
+				<div class="features-row">
+					<section>
+						<span class="icon solid major fa-university accent2"></span>
+						<h3>Recommended Study Spaces</h3>
+						<p>Find quiet and inspiring places to study near you.</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-book accent3"></span>
+						<h3>Scholarships</h3>
+						<p>Explore scholarship opportunities to fund your education.</p>
+					</section>
+				</div>
+				<div class="features-row">
+					<section>
+						<span class="icon solid major fa-user-graduate accent4"></span>
+						<h3>Tutoring & Mentorship</h3>
+						<p>Connect with mentors and tutors who can guide your academic journey.</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-briefcase accent5"></span>
+						<h3>Career Guidance</h3>
+						<p>Receive advice and resources for building a successful career.</p>
+					</section>
+				</div>
+			</section>
+		</section>
 
-				</section>
+		<!-- CTA -->
+		<section id="cta">
 
-			<!-- Footer -->
-				<footer id="footer" height: 100px>
-					
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</footer>
+			<h2>Sign up for beta access</h2>
+			<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
 
-		</div>
+			<form>
+				<div class="row gtr-50 gtr-uniform">
+					<div class="col-8 col-12-mobilep">
+						<input type="email" name="email" id="email" placeholder="Email Address" />
+					</div>
+					<div class="col-4 col-12-mobilep">
+						<input type="submit" value="Sign Up" class="fit" />
+					</div>
+				</div>
+			</form>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		</section>
 
-	</body>
+		<!-- Footer -->
+		<footer id="footer" height: 100px>
+
+			<ul class="copyright">
+				<li>&copy; Untitled. All rights reserved.</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="mapUtils.js"></script>
+</body>
+
 </html>
