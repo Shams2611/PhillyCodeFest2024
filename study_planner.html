@@ -123,8 +123,16 @@
             <div class="box features-row">
                 <section class="video-stream">
                     <h3>Study Session Stream</h3>
-                    <p><video controls>Your browser does not support the video tag.</video></p>
+                    <video id="videoElement" autoplay></video>
+                    <canvas id="canvasElement" style="display: none;"></canvas>
+                    <span id="num"></span>
+                    <span id="tired"></span>
                     <p>Drowsiness detection active</p>
+                    <!--<span id="num"></span>-->
+                    <span id="tired"></span>
+                    <script>
+                        
+                      </script>
                 </section>
                 <section class="pomodoro-timer">
                     <h3>Pomodoro Timer</h3>
@@ -139,6 +147,7 @@
                         <button onclick="resetTimer()">Reset</button>
                     </div>
                     <p>Sessions completed: <span id="completedSessions">0</span></p>
+                    <p>Timer: 25:00</p>
                 </section>
                 <div class="box features-row">
                     <section class="todo-list">
@@ -155,7 +164,6 @@
 
         <!-- Footer -->
         <footer id="footer">
-            
             <ul class="copyright">
                 <li>&copy; Untitled. All rights reserved.</li>
                 <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
@@ -172,6 +180,7 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+<<<<<<< HEAD
     <script>
         let isRunning = false;
         let timerDuration = 25 * 60; // 25 minutes
@@ -319,5 +328,8 @@
             });
         }
     </script>
+=======
+    <script src="assets/js/studyutil.js"></script>
+>>>>>>> e4ee4633aeb80677578003d9d78a74aa031582f6
 </body>
 </html>

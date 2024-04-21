@@ -1,0 +1,4 @@
+**/__pycache__/
+backend/__pycache__
+backend/drowsy_detection_code/__pycache__
+backend/.env
