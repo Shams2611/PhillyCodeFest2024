@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chatContainer {
+            display: flex;
+            gap: .5rem;
+        }
+        #chatIcon{
+            height: 2rem;
+        }
+        #iconCol{
+            justify-content: end;
+        }
+        #chatCol{
+            background-color: white;
+            border: .2rem black solid;
+            flex: 1;
+            border-radius: 0.5rem;
+            height: 20rem;
+            padding: 1rem;
+        }
+        #chatHeader{
+            text-decoration: underline .2rem;
+            text-underline-offset: .4rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chatContainer">
+        <div id="iconCol">
+            <img id="chatIcon" src="images/icons/marker_robot.png">
+        </div>
+        <div id="chatCol">
+            <span id="chatHeader">Smart Resource Summary</span>
+            <br><br>
+            <p id="generatedChat">Fill out the form to generate smart resources.</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -2,3 +2,4 @@ flask
 flask_cors
 boto3
 python-dotenv
+replicate

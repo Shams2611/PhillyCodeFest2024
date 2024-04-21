@@ -60,6 +60,17 @@ let infoImg = document.getElementById("infoImg")
 let campusRow = document.getElementById("campusRow")
 let locationCampusLabel = document.getElementById("locationCampusLabel")
 
+let scoreFill = document.getElementById("scoreFill")
+let scoreNumber = document.getElementById("scoreNumber")
+
+let mathRow = document.getElementById("mathRow")
+let scienceRow = document.getElementById("scienceRow")
+let englishRow = document.getElementById("englishRow")
+let artsRow = document.getElementById("mathRow")
+
+let starRow = document.getElementById("starRow")
+
+
 // console.log(infoImg)
 
 function addRandomOffset(coordinates) {
@@ -80,6 +91,18 @@ function getRandomNumber(min, max) {
 
 let i = 0
 let ind = 0
+let relevancy = 100
+
+/* :root {
+            --yellow: #FFC312;
+            --yellow2: #F79F1F;
+            --blue: #12CBC4;
+            --blue2: #1289A7;
+            --red: #EE5A24;
+            --red2: #EA2027;
+            --green: #C4E538;
+            --green2: #A3CB38;
+        } */
 
 function getData(info) {
     const xhttp = new XMLHttpRequest();
@@ -88,7 +111,6 @@ function getData(info) {
         if (xhttp.status === 200) {
             coordsList = [];
             stuff = [...xhttp.response];
-
 
             stuff.forEach((thing) => {
                 const [latStr, longStr] = thing.coords.slice(1, -1).split(',');
@@ -117,6 +139,7 @@ function getData(info) {
                         break;
                 }
                 thing.relevant = true
+                thing.relevancy = 100
                 //decide if it's relevant
                 //name, age, gender, school, subject, additional
                 //0   ,   1,      2,      3,       4,          5
@@ -129,49 +152,93 @@ function getData(info) {
                     // // }
                     switch (studyFocus) {
                         case "math":
-                            if (thing.math != 'yes') {
+                            if (thing.math == 'no') {
                                 thing.relevant = false
+                                thing.relevancy -= 20
                             }
                             break;
                         case "science":
-                            if (thing.science != 'yes') {
+                            if (thing.science == 'no') {
                                 thing.relevant = false
+                                thing.relevancy -= 20
                             }
                             break;
                         case "english":
-                            if (thing.english != 'yes') {
+                            if (thing.english == 'no') {
                                 thing.relevant = false
+                                thing.relevancy -=20
                             }
                             break;
                         case "arts":
-                            if (thing.arts != 'yes') {
+                            if (thing.arts == 'no') {
                                 thing.relevant = false
+                                thing.relevancy-=20
                             }
                             break;
                     }
+                    let userAge = info[1]
+
+                    if (userAge > thing.maxAge || userAge < thing.minAge) {
+                        thing.relevant = false;
+                        thing.relevancy-=15
+                    }
+                    console.log(thing.relevancy)
+                    // if()
+
+                    let campus = info[3]
+                    if(thing.restriction != "n/a" && thing.restriction != campus){
+                        thing.relevancy -= 25
+                    }
                 }
 
-                // if(relevant){
+                thing.relevancy-=(dist*20)
+                thing.relevancy-=getRandomNumber(2,10)
 
-                // }
-
-                if (!thing.relevant) {
-                    console.log("not relevant")
-                    // thing.ind += 4
+                if(thing.relevancy>100){
+                    thing.relevancy = 100
                 }
+                else if(thing.relevancy<0){
+                    thing.relevancy = 0
+                }
+
+                if(thing.relevancy < 40){
+                    thing.relevant = false;
+                }
+
                 // console.log("-"+coords+"-"+i++)
-                console.log(thing.ind)
+                //console.log(thing.ind)
                 var newMarker = new L.marker(coords, { icon: iconsList[thing.relevant ? thing.ind : thing.ind + 4] })
                 markers[thing.ind].push(newMarker)
                 newMarker.addTo(map).on("click", function (e) {
+
+                    mathRow.style = thing.math == "n/a" ? "display: none;" : "display: flex";
+                    scienceRow.style = thing.science == "n/a" ? "display: none;" : "display: flex";
+                    englishRow.style = thing.english == "n/a" ? "display: none;" : "display: flex";
+                    artsRow.style = thing.arts == "n/a" ? "display: none;" : "display: flex";
+
                     routeToPoint(coords, markerColors[thing.ind % 4])
                     validateCheck("math", thing.math)
                     validateCheck("science", thing.science)
                     validateCheck("english", thing.english)
                     validateCheck("arts", thing.arts)
+
+                    starRow.style = thing.rating == "n/a" ? "display: none;" : "display: flex";
+
                     locationNameLabel.innerText = thing.name
                     locationTypeLabel.innerText = capitalizeWords(thing.type)
                     locationAddressLabel.innerText = thing.address
+                    //fix this later
+                    let fillColor = "#EE5A24"
+                    if(thing.relevancy >= 33){
+                        fillColor = "#FFC312"
+                    }
+                    if(thing.relevancy >= 66){
+                        fillColor = "#C4E538"
+                    }
+
+                    scoreFill.style = "width: "+thing.relevancy+"%; background-color: "+fillColor+";";
+                    scoreNumber.innerText = thing.relevancy.toFixed(2)
+
                     for (let i = 0; i < 5; i++) {
                         evaluateStar(thing.rating, i)
                     }
@@ -233,7 +300,7 @@ getData()
 
 const secondFunction = async () => {
     const result = await getData()
-    console.log("Data Recieved.")
+    console.log("Data Received.")
 }
 
 function hideMarkers(ind) {
@@ -403,10 +470,55 @@ function getFormData(event) {
     for (let i = 0; i < info.length; i++) {
         info[i] = info[i].value;
     }
-    console.log(info)
+    //console.log(info)
     removeMarkers()
     removeRoute()
+
+    //info
+    //name, age, gender, school, subject, additional
+    //0   ,   1,      2,      3,       4,          5
+    //
+
+
     //get the markers again, but with parameters
     getData(info)
+    sendChat(info)
 }
 form.addEventListener('submit', getFormData);
+
+function sendChat(info) {
+
+    // const msg = document.getElementById(info[0]).value;
+    //format this later
+
+    //name, age, gender, school, subject, additional
+    //0   ,   1,      2,      3,       4,          5
+    //
+
+    // "prompt": f"i am a highschool senior/college student{" named " + addinfo if addinfo is not None else ""}. 
+    // Why do you think {studycenter} is a good place to study? Please tell me only 60 words and be a bit specific 
+    // about the building and talk about which college majors usually study there",
+
+    const data = {
+        input: `I am looking for educational opportunities. I am a ${info[1]} year old named ${info[0]}
+        and I go to the school ${info[3]} and I am trying to find resources related to ${info[4]}. My gender is ${info[2]}. Some additional information to consider is that
+        ${info[5]}. Please address me by name, and tell me about a resource that is available to me in around 50 words.
+        be a bit specific in the response, and don't include a preamble to the response.`
+    };
+
+    fetch('/testchat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result)
+            document.getElementById('generatedChat').textContent = result.response;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}

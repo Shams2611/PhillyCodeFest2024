@@ -1,40 +1,86 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <title>Study Planner</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
+<<<<<<< HEAD
     <link rel="icon" type="image/x-icon" href="images/markers/marker_studying.png" />
 
+=======
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/2b9cdc1c9a.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="images/markers/marker_tutoring.png" />
+    <!-- roboto mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <!-- roboto slab -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap"
+        rel="stylesheet">
+>>>>>>> 03685622146b28a9b3d2ffe9c94a7220469d0f5f
     <style>
+        body > .skiptranslate {
+            display: none;
+        }
+        :root {
+            --yellow: #FFC312;
+            --yellow2: #F79F1F;
+            --blue: #12CBC4;
+            --blue2: #1289A7;
+            --red: #EE5A24;
+            --red2: #EA2027;
+            --green: #C4E538;
+            --green2: #A3CB38;
+        }
+
         .features-row {
             display: flex;
             justify-content: space-between;
             padding: 20px;
             flex-wrap: wrap;
         }
+
         .box {
             margin-bottom: 20px;
         }
-        .video-stream, .pomodoro-timer, .todo-list {
+
+        .video-stream,
+        .pomodoro-timer,
+        .todo-list {
             flex-basis: calc(50% - 10px);
             margin: 5px;
             background: #f8f8f8;
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center align all items */
+            align-items: center;
+            /* Center align all items */
         }
+
         .todo-list {
             flex-basis: 100%;
         }
+
         video {
             width: 100%;
             height: auto;
         }
+
         /* Style for circular progress bar */
         .progress-circle {
             width: 150px;
@@ -42,39 +88,51 @@
             transform: rotate(-90deg);
             margin-bottom: 10px;
         }
+
         .progress-circle-bg,
         .progress-circle-fg {
             fill: none;
             stroke-width: 12;
         }
+
         .progress-circle-bg {
             stroke: #eee;
         }
+
         .progress-circle-fg {
             stroke: #f77;
-            stroke-dasharray: 471px; /* Adjusted for new radius */
-            stroke-dashoffset: 471px; /* Adjusted for new radius */
+            stroke-dasharray: 471px;
+            /* Adjusted for new radius */
+            stroke-dashoffset: 471px;
+            /* Adjusted for new radius */
             transition: stroke-dashoffset 0.5s;
         }
+
         #timer {
-            font-size: 2em; /* Larger font size for timer */
-            margin-bottom: 10px; /* Spacing between timer and buttons */
+            font-size: 2em;
+            /* Larger font size for timer */
+            margin-bottom: 10px;
+            /* Spacing between timer and buttons */
         }
+
         .button-group {
             display: flex;
             justify-content: center;
             gap: 10px;
         }
-        .todo-list{
+
+        .todo-list {
             width: 100%S;
         }
+
         .todo-list {
             flex-basis: 100%;
             padding: 20px;
             background: #f1f1f1;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+
         .task-list-item {
             background: #ffffff;
             border-radius: 5px;
@@ -84,21 +142,48 @@
             align-items: center;
             justify-content: space-between;
         }
+
         .task-text {
             flex-grow: 1;
         }
+
         .completed {
             text-decoration: line-through;
             color: #ccc;
         }
+
         input[type="text"] {
             padding: 10px;
             margin: 10px 0;
             width: calc(100% - 22px);
             box-sizing: border-box;
         }
+
         button {
             cursor: pointer;
+            padding: 1rem;
+            border: 0;
+            border-radius: 1rem;
+        }
+        #playBtn{
+            background-color: var(--green);
+        }
+        #pauseBtn{
+            background-color: var(--yellow);
+        }
+        #resetBtn{
+            background-color: var(--red);
+        }
+        #playBtn, #pauseBtn, #resetBtn{
+            transition: 0.5s;
+            width: 4rem;
+        }
+        #playBtn:hover, #pauseBtn:hover, #resetBtn:hover{
+            background-color: white;
+        }
+
+        body {
+            font-family: "Roboto Slab";
         }
         @media only screen and (max-width: 600px) {
     .features-row {
@@ -118,17 +203,22 @@
 
     </style>
 </head>
+
 <body class="is-preload">
     <div id="page-wrapper">
 
         <!-- Header -->
         <header id="header">
-            <h1><a href="index.html">Opportunity Finder</a></h1>
+            <h1><a href="index.html">EqualEd Opportunity Finder</a></h1>
+            
             <nav id="nav">
                 <ul>
+                    
                     <li><a href="index.html">Home</a></li>
                     <li><a href="study_planner.html" class="active">Study Planner</a></li>
+                    
                 </ul>
+                
             </nav>
         </header>
 
@@ -136,6 +226,7 @@
         <section id="main" class="container">
             <header>
                 <h2>Study Organizer</h2>
+                <div id="google_translate_element"></div>
                 <p>Organize and manage your study sessions effectively</p>
             </header>
             <div class="box features-row">
@@ -149,23 +240,29 @@
                     <!--<span id="num"></span>-->
                     <span id="tired"></span>
                     <script>
-                        
-                      </script>
+
+                    </script>
                 </section>
                 <section class="pomodoro-timer">
                     <h3>Pomodoro Timer</h3>
                     <svg class="progress-circle">
-                        <circle class="progress-circle-bg" cx="75" cy="75" r="60"/>
-                        <circle class="progress-circle-fg" cx="75" cy="75" r="60" id="progress"/>
+                        <circle class="progress-circle-bg" cx="75" cy="75" r="60" />
+                        <circle class="progress-circle-fg" cx="75" cy="75" r="60" id="progress" />
                     </svg>
                     <p id="timer">25:00</p>
                     <div class="button-group">
-                        <button onclick="startTimer()">Start</button>
-                        <button onclick="pauseTimer()">Pause</button>
-                        <button onclick="resetTimer()">Reset</button>
+                        <button id="playBtn" onclick="startTimer()">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <button id="pauseBtn" onclick="pauseTimer()">
+                            <i class="fa-solid fa-pause"></i>
+                        </button>
+                        <button id="resetBtn" onclick="resetTimer()">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
                     </div>
-                    <p>Sessions completed: <span id="completedSessions">0</span></p>
-                    <p>Timer: 25:00</p>
+                    <!-- <p>Sessions completed: <span id="completedSessions">0</span></p> -->
+                    <!-- <p>Timer: 25:00</p> -->
                 </section>
                 <div class="box features-row">
                     <section class="todo-list">
@@ -198,6 +295,12 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+    <script src="assets/js/studyutil.js"></script>
+=======
+>>>>>>> 03685622146b28a9b3d2ffe9c94a7220469d0f5f
     <script>
         let isRunning = false;
         let timerDuration = 25 * 60; // 25 minutes
@@ -254,7 +357,7 @@
         }
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadTasks();
         });
 
@@ -277,13 +380,15 @@
                 textSpan.className = 'task-text';
 
                 const checkButton = document.createElement('button');
-                checkButton.textContent = 'Done';
+                // checkButton.textContent = 'Done';
+                checkButton.innerHTML = "<i class='fa-solid fa-flag-checkered'></i>"
                 checkButton.onclick = function () {
                     textSpan.classList.toggle('completed');
                 };
 
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
+                // deleteButton.textContent = 'Delete';
+                deleteButton.innerHTML = "<i class='fa-solid fa-trash-can'></i>"
                 deleteButton.onclick = function () {
                     taskList.removeChild(taskItem);
                 };
@@ -325,14 +430,17 @@
                 }
 
                 const checkButton = document.createElement('button');
-                checkButton.textContent = 'Done';
+                // checkButton.textContent = 'Done';
+                checkButton.innerHTML = "<i class='fa-solid fa-flag-checkered'></i>"
                 checkButton.onclick = function () {
                     textSpan.classList.toggle('completed');
                     saveTasks();
                 };
 
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
+                // deleteButton.textContent = 'Delete';
+                deleteButton.innerHTML = "<i class='fa-solid fa-trash-can'></i>"
+
                 deleteButton.onclick = function () {
                     taskList.removeChild(taskItem);
                     saveTasks();
@@ -345,6 +453,11 @@
             });
         }
     </script>
+<<<<<<< HEAD
     <script src="assets/js/studyutil.js"></script>
+=======
+>>>>>>> Stashed changes
+>>>>>>> 03685622146b28a9b3d2ffe9c94a7220469d0f5f
 </body>
+
 </html>
