@@ -206,7 +206,7 @@ function getData(info) {
                 }
 
                 // console.log("-"+coords+"-"+i++)
-                console.log(thing.ind)
+                //console.log(thing.ind)
                 var newMarker = new L.marker(coords, { icon: iconsList[thing.relevant ? thing.ind : thing.ind + 4] })
                 markers[thing.ind].push(newMarker)
                 newMarker.addTo(map).on("click", function (e) {
@@ -300,7 +300,7 @@ getData()
 
 const secondFunction = async () => {
     const result = await getData()
-    console.log("Data Recieved.")
+    console.log("Data Received.")
 }
 
 function hideMarkers(ind) {
@@ -470,7 +470,7 @@ function getFormData(event) {
     for (let i = 0; i < info.length; i++) {
         info[i] = info[i].value;
     }
-    console.log(info)
+    //console.log(info)
     removeMarkers()
     removeRoute()
     //get the markers again, but with parameters
