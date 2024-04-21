@@ -205,6 +205,15 @@
 			height: 1.5rem;
 			width: 1.5rem;
 		}
+		.goog-te-gadget img{
+    		display:none !important;
+		}
+		body > .skiptranslate {
+			display: none;
+		}
+		body {
+			top: 0px !important;
+		}
 
 		.leaflet-routing-container {
 			background-color: var(--blue);
@@ -311,15 +320,24 @@
 </head>
 
 <body class="landing is-preload">
+	<script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
 	<div id="page-wrapper">
-
+		
 		<!-- Header -->
 		<header id="header" class="alt">
 			<h1><a href="index.html">EqualEd Opportunity Finder</a></h1>
+			
 			<nav id="nav">
 				<ul>
 					<li><a href="index.html">Home</a></li>
 					<li><a href="study_planner.html">Study Planner</a></li>
+					<li><div id="google_translate_element"></div></li>
 				</ul>
 			</nav>
 		</header>
