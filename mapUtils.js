@@ -60,6 +60,9 @@ let infoImg = document.getElementById("infoImg")
 let campusRow = document.getElementById("campusRow")
 let locationCampusLabel = document.getElementById("locationCampusLabel")
 
+let scoreFill = document.getElementById("scoreFill")
+let scoreNumber = document.getElementById("scoreNumber")
+
 // console.log(infoImg)
 
 function addRandomOffset(coordinates) {
@@ -80,6 +83,18 @@ function getRandomNumber(min, max) {
 
 let i = 0
 let ind = 0
+let relevancy = 100
+
+/* :root {
+            --yellow: #FFC312;
+            --yellow2: #F79F1F;
+            --blue: #12CBC4;
+            --blue2: #1289A7;
+            --red: #EE5A24;
+            --red2: #EA2027;
+            --green: #C4E538;
+            --green2: #A3CB38;
+        } */
 
 function getData(info) {
     const xhttp = new XMLHttpRequest();
@@ -88,7 +103,6 @@ function getData(info) {
         if (xhttp.status === 200) {
             coordsList = [];
             stuff = [...xhttp.response];
-
 
             stuff.forEach((thing) => {
                 const [latStr, longStr] = thing.coords.slice(1, -1).split(',');
@@ -117,6 +131,7 @@ function getData(info) {
                         break;
                 }
                 thing.relevant = true
+                thing.relevancy = 100
                 //decide if it's relevant
                 //name, age, gender, school, subject, additional
                 //0   ,   1,      2,      3,       4,          5
@@ -129,35 +144,39 @@ function getData(info) {
                     // // }
                     switch (studyFocus) {
                         case "math":
-                            if (thing.math != 'yes') {
+                            if (thing.math == 'no') {
                                 thing.relevant = false
+                                thing.relevancy -= 20
                             }
                             break;
                         case "science":
-                            if (thing.science != 'yes') {
+                            if (thing.science == 'no') {
                                 thing.relevant = false
+                                thing.relevancy -= 20
                             }
                             break;
                         case "english":
-                            if (thing.english != 'yes') {
+                            if (thing.english == 'no') {
                                 thing.relevant = false
+                                thing.relevancy -=20
                             }
                             break;
                         case "arts":
-                            if (thing.arts != 'yes') {
+                            if (thing.arts == 'no') {
                                 thing.relevant = false
+                                thing.relevancy-=20
                             }
                             break;
                     }
-                }
+                    let userAge = info[1]
 
-                // if(relevant){
+                    if (userAge > thing.maxAge || userAge < thing.minAge) {
+                        thing.relevant = false;
+                        thing.relevancy-=15
+                    }
 
-                // }
-
-                if (!thing.relevant) {
-                    console.log("not relevant")
-                    // thing.ind += 4
+                    console.log(thing.relevancy)
+                    // if()
                 }
                 // console.log("-"+coords+"-"+i++)
                 console.log(thing.ind)
@@ -172,6 +191,18 @@ function getData(info) {
                     locationNameLabel.innerText = thing.name
                     locationTypeLabel.innerText = capitalizeWords(thing.type)
                     locationAddressLabel.innerText = thing.address
+                    //fix this later
+                    let fillColor = "#EE5A24"
+                    if(thing.relevancy >= 33){
+                        fillColor = "#FFC312"
+                    }
+                    else if(thing.relevancy >= 66){
+                        fillColor = "#C4E538"
+                    }
+
+                    scoreFill.style = "width: "+thing.relevancy+"%; background-color: "+fillColor+";";
+                    scoreNumber.innerText = thing.relevancy
+
                     for (let i = 0; i < 5; i++) {
                         evaluateStar(thing.rating, i)
                     }
