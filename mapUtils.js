@@ -156,24 +156,40 @@ function getData(info) {
                                 thing.relevant = false
                                 thing.relevancy -= 20
                             }
+                            else if (thing.math == 'n/a') {
+                                thing.relevant = false
+                                thing.relevancy -= 10
+                            }
                             break;
                         case "science":
                             if (thing.science == 'no') {
                                 thing.relevant = false
                                 thing.relevancy -= 20
                             }
+                            else if (thing.science == 'n/a') {
+                              thing.relevant = false
+                              thing.relevancy -= 10
+                          }
                             break;
                         case "english":
                             if (thing.english == 'no') {
                                 thing.relevant = false
                                 thing.relevancy -=20
                             }
+                            else if (thing.english == 'n/a') {
+                              thing.relevant = false
+                              thing.relevancy -= 10
+                          }
                             break;
                         case "arts":
                             if (thing.arts == 'no') {
                                 thing.relevant = false
                                 thing.relevancy-=20
                             }
+                            else if (thing.arts == 'n/a') {
+                              thing.relevant = false
+                              thing.relevancy -= 10
+                          }
                             break;
                     }
                     let userAge = info[1]
