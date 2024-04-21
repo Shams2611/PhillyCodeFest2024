@@ -117,9 +117,15 @@ function startCapturingImages() {
                     }
 
                     //document.getElementById("num").textContent = data.count;
-                    if (data.isTired && !alerted) {
-                        alert("You seem tired. Maybe you should take a break");
-                        alerted = true;
+                    if (data.isTired) {
+                        var audio = new Audio('sound.mp3');
+                        audio.play();
+                        document.getElementById("tired").textContent = "You seem Tired";
+                        if (!alerted) {
+                            
+                            alert("You seem tired. Maybe you should take a break");
+                            alerted = true;
+                        }
                     }
                 })
                 .catch(error => {

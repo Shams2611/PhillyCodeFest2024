@@ -1,0 +1,10 @@
+import multiprocessing
+from playsound import playsound
+def main():
+    p = multiprocessing.Process(target=playsound, args=('PhillyCodeFest2024/backend/audio_test/608088__funwithsound__horn-14-leslie-125.mp3',))
+    p.start()
+    input("press ENTER to stop playback")
+    p.terminate()
+
+if __name__ == "__main__":
+    main()

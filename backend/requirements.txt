@@ -4,3 +4,6 @@ boto3
 python-dotenv
 replicate
 gunicorn
+setuptools
+wheel
+playsound==1.2.2
