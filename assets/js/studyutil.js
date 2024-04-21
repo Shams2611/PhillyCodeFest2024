@@ -5,18 +5,29 @@ let timerId;
 let completedSessions = 0;
 const circumference = 2 * Math.PI * 60; // Circle circumference for larger progress bar
 
+const progressCircle = document.getElementById('progress');
+let timeLeft = totalDuration;
+
+function updateDrowsyDetectionStatus() {
+    if (isRunning) {
+        document.getElementById("drowsyStatus").textContent = "Drowsiness detection Active"
+    } else {
+        document.getElementById("drowsyStatus").textContent = "Drowsiness detection Inactive"
+    }
+}
+
 function startTimer() {
     if (!isRunning) {
         isRunning = true;
+        updateDrowsyDetectionStatus()
         timerId = setInterval(() => {
-            if (timerDuration > 0) {
-                timerDuration--;
+            if (timeLeft > 0) {
+                timeLeft--;
                 updateDisplay();
+                updateProgress(timeLeft);
             } else {
-                completedSessions++;
-                document.getElementById('completedSessions').textContent = completedSessions;
-                resetTimer();
                 alert('Time is up!');
+                resetTimer();
             }
         }, 1000);
     }
@@ -24,6 +35,7 @@ function startTimer() {
 
 function pauseTimer() {
     if (isRunning) {
+        updateDrowsyDetectionStatus()
         clearInterval(timerId);
         isRunning = false;
     }
@@ -31,16 +43,17 @@ function pauseTimer() {
 
 function resetTimer() {
     clearInterval(timerId);
-    timerDuration = 25 * 60; // reset to 25 minutes
+    timeLeft = totalDuration;
     isRunning = false;
+    updateDrowsyDetectionStatus()
     updateDisplay();
+    updateProgress(timeLeft); // Reset the progress circle to full
 }
 
 function updateDisplay() {
-    let minutes = Math.floor(timerDuration / 60);
-    let seconds = timerDuration % 60;
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
     document.getElementById('timer').textContent = `${padTime(minutes)}:${padTime(seconds)}`;
-    updateProgress(timerDuration);
 }
 
 function padTime(time) {
@@ -48,8 +61,8 @@ function padTime(time) {
 }
 
 function updateProgress(timeLeft) {
-    const progress = (1 - timeLeft / totalDuration) * circumference;
-    document.getElementById('progress').style.strokeDashoffset = circumference - progress;
+    const progress = (1 - timeLeft / totalDuration) * (2 * Math.PI * 60); // Updated to use the actual circumference
+    progressCircle.style.strokeDashoffset = 471 - progress; // Make sure this aligns with your SVG's circumference
 }
 
 var alerted = false;
@@ -97,6 +110,11 @@ function startCapturingImages() {
             })
                 .then(response => response.json())
                 .then(data => {
+                    if (data.drowsyDetected) {
+                        document.getElementById("tired").textContent = "You seem tired...";
+                    } else {
+                        document.getElementById("tired").textContent = "Looking good!";
+                    }
 
                     //document.getElementById("num").textContent = data.count;
                     if (data.isTired) {

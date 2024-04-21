@@ -48,7 +48,8 @@
 			display: flex;
 			gap: .25rem;
 		}
-		.right-row-img{
+
+		.right-row-img {
 			line-height: 1.5rem;
 			height: 1.5rem;
 			width: 1.5rem;
@@ -205,12 +206,15 @@
 			height: 1.5rem;
 			width: 1.5rem;
 		}
-		.goog-te-gadget img{
-    		display:none !important;
+
+		.goog-te-gadget img {
+			display: none !important;
 		}
-		body > .skiptranslate {
+
+		body>.skiptranslate {
 			display: none;
 		}
+
 		body {
 			top: 0px !important;
 		}
@@ -235,55 +239,123 @@
 			font-family: "Roboto Slab";
 		}
 
-		.fa-circle-check{
+		.fa-circle-check {
 			color: var(--green);
 		}
-		.fa-circle-xmark{
+
+		.fa-circle-xmark {
 			color: var(--red);
 		}
-		.feature-img{
+
+		.feature-img {
 			height: 5rem;
 			width: 5rem;
 		}
+
 		#chatContainer {
-            display: flex;
-            gap: .5rem;
-        }
-        #chatIcon{
-            height: 2rem;
-        }
-        #iconCol{
-            justify-content: end;
-        }
-        #chatCol{
-            background-color: white;
-            border: .2rem var(--blue2) solid;
-            flex: 1;
-            border-radius: 0.5rem;
-            min-height: 10rem;
-            padding: 1rem;
-        }
-        #chatHeader{
-            text-decoration: underline var(--blue2) .2rem;
-            text-underline-offset: .4rem;
+			display: flex;
+			gap: .5rem;
+		}
+
+		#chatIcon {
+			height: 2rem;
+		}
+
+		#iconCol {
+			justify-content: end;
+		}
+
+		#chatCol {
+			background-color: white;
+			border: .2rem var(--blue2) solid;
+			flex: 1;
+			border-radius: 0.5rem;
+			min-height: 10rem;
+			padding: 1rem;
+		}
+
+		#chatHeader {
+			text-decoration: underline var(--blue2) .2rem;
+			text-underline-offset: .4rem;
 			color: var(--blue2);
 			font-weight: bolder;
-        }
-		#aboutUs{
+		}
+
+		#aboutUs {
 			display: flex;
 			justify-content: space-around;
 		}
-		#aboutCol{
+
+		#aboutCol {
 			/* flex: 1; */
 			display: flex;
 			flex-direction: column;
 		}
-		#aboutImg{
+
+		#aboutImg {
 			height: 4rem;
 			width: 4rem;
 			/* height: 50%; */
 			object-fit: cover;
 			border-radius: .25rem;
+		}
+
+		#chatOuter {
+			display: flex;
+			flex-direction: column;
+			position: fixed;
+			z-index: 1000;
+			bottom: 1rem;
+			right: 1rem;
+			padding: 1rem;
+			gap: .5rem;
+			min-height: 10rem;
+			background-color: rgba(211, 211, 211, 0.411);
+			border-radius: 0.5rem;
+		}
+
+		#chatName {
+			background-color: #12cbc598;
+			padding: .25rem;
+			border-radius: .5rem;
+			text-align: center;
+			/* font-weight: bold; */
+			color: black;
+		}
+
+		#chatSend {
+			display: flex;
+			align-items: flex-end;
+			/* doesnt work lol */
+			/* color: gray; */
+			/* color: red; */
+		}
+
+		#chatSendBtn {
+			background-color: var(--blue);
+			border: 0;
+			/* padding: .5rem; */
+			border-radius: .5rem;
+			/* min-width: 10rem; */
+			line-height: 2rem;
+			height: 2rem;
+			/* float: right; */
+		}
+		#chatSendBtn:hover{
+			background-color: var(--blue2);
+		}
+
+		#chatResponse {
+			padding: .5rem;
+			background-color: rgba(255, 255, 255, 0.411);
+			border-radius: .5rem;
+			min-height: 4rem;
+			color: black;
+		}
+
+		#chatInp {
+			border: 0;
+			color: black;
 		}
 	</style>
 	<!-- <link rel="stylesheet" href="styles.css"> -->
@@ -321,23 +393,25 @@
 
 <body class="landing is-preload">
 	<script type="text/javascript">
-        function googleTranslateElementInit() {
-          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+		}
+	</script>
+	<script type="text/javascript"
+		src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 	<div id="page-wrapper">
-		
 		<!-- Header -->
 		<header id="header" class="alt">
 			<h1><a href="index.html">EqualEd Opportunity Finder</a></h1>
-			
+
 			<nav id="nav">
 				<ul>
 					<li><a href="index.html">Home</a></li>
 					<li><a href="study_planner.html">Study Planner</a></li>
-					<li><div id="google_translate_element"></div></li>
+					<li>
+						<div id="google_translate_element"></div>
+					</li>
 				</ul>
 			</nav>
 		</header>
@@ -350,7 +424,7 @@
 				<!-- <li><a href="#" class="button primary">Get Started</a></li> -->
 			</ul>
 		</section>
-		
+
 
 		<!-- Main -->
 		<section id="main" class="container">
@@ -358,13 +432,13 @@
 				<div class="features-row">
 					<section>
 						<!-- <span class="icon solid major fa-university accent2"></span> -->
-						<img class = "feature-img" src="images/markers/marker_studying.png">
+						<img class="feature-img" src="images/markers/marker_studying.png">
 						<h3>Study Spaces</h3>
 						<p>Find quiet and inspiring places to study near you.</p>
 					</section>
 					<section>
 						<!-- <span class="icon solid major fa-user-graduate accent4"></span> -->
-						<img class = "feature-img" src="images/markers/marker_tutoring.png">
+						<img class="feature-img" src="images/markers/marker_tutoring.png">
 
 						<h3>Tutoring & Mentorship</h3>
 						<p>Connect with mentors and tutors who can guide you academically.</p>
@@ -373,13 +447,13 @@
 				<div class="features-row">
 					<section>
 						<!-- <span class="icon solid major fa-briefcase accent5"></span> -->
-						<img class = "feature-img" src="images/markers/marker_career.png">
+						<img class="feature-img" src="images/markers/marker_career.png">
 						<h3>Career Guidance</h3>
 						<p>Receive advice and resources for building a successful career.</p>
 					</section>
 					<section>
 						<!-- <span class="icon solid major fa-book accent3"></span> -->
-						<img class = "feature-img" src="images/markers/marker_scholarship.png">
+						<img class="feature-img" src="images/markers/marker_scholarship.png">
 						<h3>Scholarships</h3>
 						<p>Explore scholarship opportunities to fund your education.</p>
 					</section>
@@ -387,8 +461,8 @@
 			</section>
 		</section>
 
-			<!-- Opportunities Form -->
-			<section id="main" class="container">
+		<!-- Opportunities Form -->
+		<section id="main" class="container">
 
 			<section class="box special">
 				<header class="major">
@@ -527,7 +601,8 @@
 						<div class="right-row">
 							Relevancy score:
 							<div class="prog-bar-container">
-								<div id="scoreFill" class="prog-bar-fill" style="width:100%; background-color: #C4E538;"></div>
+								<div id="scoreFill" class="prog-bar-fill"
+									style="width:100%; background-color: #C4E538;"></div>
 							</div>
 							<span id="scoreNumber">100.00</span>%
 						</div>
@@ -539,26 +614,29 @@
 						</div>
 						<div id="mathRow" class="right-row">
 							Math:
-							<img id="math-check" class = "right-row-img" src="images/icons/icon_check.png">
-							<img style="display: none;"id="math-x" class = "right-row-img" src="images/icons/icon_x.png">
+							<img id="math-check" class="right-row-img" src="images/icons/icon_check.png">
+							<img style="display: none;" id="math-x" class="right-row-img" src="images/icons/icon_x.png">
 							<!-- <div class="prog-bar-container">
 								<div class="prog-bar-fill" style="width:100%"></div>
 							</div> -->
 						</div>
 						<div id="scienceRow" class="right-row">
 							Science:
-							<img id="science-check"class = "right-row-img" src="images/icons/icon_check.png">
-							<img style="display: none;" id="science-x"class = "right-row-img" src="images/icons/icon_x.png">
+							<img id="science-check" class="right-row-img" src="images/icons/icon_check.png">
+							<img style="display: none;" id="science-x" class="right-row-img"
+								src="images/icons/icon_x.png">
 						</div>
 						<div id="englishRow" class="right-row">
 							English:
-							<img id="english-check" class = "right-row-img" src="images/icons/icon_check.png">
-							<img style="display:none;"id="english-x" class = "right-row-img" src="images/icons/icon_x.png">
+							<img id="english-check" class="right-row-img" src="images/icons/icon_check.png">
+							<img style="display:none;" id="english-x" class="right-row-img"
+								src="images/icons/icon_x.png">
 						</div>
 						<div id="artsRow" class="right-row">
 							Arts:
-							<img style="display: none;"id="arts-check" class = "right-row-img" src="images/icons/icon_check.png">
-							<img id="arts-x" class = "right-row-img" src="images/icons/icon_x.png">
+							<img style="display: none;" id="arts-check" class="right-row-img"
+								src="images/icons/icon_check.png">
+							<img id="arts-x" class="right-row-img" src="images/icons/icon_x.png">
 						</div>
 					</div>
 				</div>
@@ -618,40 +696,51 @@
 				</div>
 			</section>
 		</section>
-		
-	</section>
+
+		</section>
 
 		<!-- CTA -->
 		<section id="cta" style="background-color: #006266;">
-
-<<<<<<< HEAD
-			<h2></h2>
-=======
+			<div id="chatOuter" style="clear: both;">
+				<div id="chatName">
+					Smart Chat
+				</div>
+				<div id="chatResponse">
+					...
+				</div>
+				<div>
+					<input type="text" id="chatInp" name="name" placeholder="Type your question here.">
+				</div>
+				<div id="chatSend">
+					<button id="chatSendBtn">
+						<i class="fa-solid fa-paper-plane"></i>
+					</button>
+				</div>
+			</div>
 			<h2>About Us</h2>
 			<p>See the team behind this amazing project.</p>
 			<div id="aboutUs">
 				<div id="aboutCol">
 					<img id="aboutImg" src="images/profiles/shams.jpeg">
-					Shams
+					Shams A.
 				</div>
 				<div id="aboutCol">
 					<img id="aboutImg" src="images/profiles/elan.jpeg">
-					Elan
+					Elan R.
 				</div>
 				<div id="aboutCol">
 					<img id="aboutImg" src="images/profiles/max.jpeg">
-					Max
+					Max C.
 				</div>
 				<div id="aboutCol">
 					<img id="aboutImg" src="images/profiles/chi.jpeg">
-					Chi
+					Chi N.
 				</div>
 				<div id="aboutCol">
 					<img id="aboutImg" src="images/profiles/nico.jpeg">
-					Nico
+					Nico P.
 				</div>
 			</div>
->>>>>>> 03685622146b28a9b3d2ffe9c94a7220469d0f5f
 
 			<!-- <form>
 				<div class="row gtr-50 gtr-uniform">

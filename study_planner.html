@@ -55,7 +55,7 @@
         .video-stream,
         .pomodoro-timer,
         .todo-list {
-            flex-basis: calc(50% - 10px);
+            /* flex-basis: calc(50% - 10px); */
             margin: 5px;
             background: #f8f8f8;
             border-radius: 8px;
@@ -69,7 +69,6 @@
 
         .todo-list {
             flex-basis: 100%;
-            flex-basis: auto;
         }
 
         video {
@@ -117,9 +116,12 @@
             gap: 10px;
         }
 
+        .todo-list {
+            width: 100%;
+        }
 
         .todo-list {
-            flex-basis: auto;
+            flex-basis: 100%;
             padding: 20px;
             background: #f1f1f1;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -132,8 +134,10 @@
             padding: 10px;
             margin: 5px 0;
             display: flex;
-            align-items: center;
+            /* align-items: center; */
+            /* width: 100%; */
             justify-content: space-between;
+            gap: 1rem;
         }
 
         .task-text {
@@ -227,10 +231,8 @@
                     <h3>Study Session Stream</h3>
                     <video id="videoElement" autoplay></video>
                     <canvas id="canvasElement" style="display: none;"></canvas>
-                    <span id="num"></span>
-                    <span id="tired"></span>
-                    <p>Drowsiness detection active</p>
-                    <!--<span id="num"></span>-->
+                    <p id="drowsyStatus">Drowsiness detection Inactive</p>
+                    <!-- <span id="num"></span> -->
                     <span id="tired"></span>
                     <script>
 
@@ -257,24 +259,22 @@
                     <!-- <p>Sessions completed: <span id="completedSessions">0</span></p> -->
                     <!-- <p>Timer: 25:00</p> -->
                 </section>
-                <div class="box features-row">
-                    <section class="todo-list">
-                        <h3>To-Do List</h3>
-                        <ul id="taskList">
-                            <!-- Tasks will be dynamically added here -->
-                        </ul>
-                        <input type="text" id="newTask" placeholder="Add new task" onkeypress="handleKeyPress(event)">
+                <section class="todo-list">
+                    <h3>To-Do List</h3>
+                    <ul id="taskList">
+                        <!-- Tasks will be dynamically added here -->
+                    </ul>
+                    <input type="text" id="newTask" placeholder="Add new task" onkeypress="handleKeyPress(event)">
                         <button onclick="addTask()">Add</button>
-                    </section>
-                </div>
+                </section>
             </div>
         </section>
 
         <!-- Footer -->
         <footer id="footer">
             <ul class="copyright">
-                <li>&copy; Untitled. All rights reserved.</li>
-                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                <li>&copy; EqualEd, 2024. All rights reserved.</li>
+                <!-- <li>Design: <a href="http://html5up.net">HTML5 UP</a></li> -->
             </ul>
         </footer>
 
@@ -288,70 +288,12 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
     <script src="assets/js/studyutil.js"></script>
-=======
->>>>>>> 03685622146b28a9b3d2ffe9c94a7220469d0f5f
-    <script>
-        let isRunning = false;
-        let timerDuration = 25 * 60; // 25 minutes
-        let totalDuration = timerDuration;
-        let timerId;
-        let completedSessions = 0;
-        const circumference = 2 * Math.PI * 60; // Circle circumference for larger progress bar
-
-        function startTimer() {
-            if (!isRunning) {
-                isRunning = true;
-                timerId = setInterval(() => {
-                    if (timerDuration > 0) {
-                        timerDuration--;
-                        updateDisplay();
-                    } else {
-                        completedSessions++;
-                        document.getElementById('completedSessions').textContent = completedSessions;
-                        resetTimer();
-                        alert('Time is up!');
-                    }
-                }, 1000);
-            }
-        }
-
-        function pauseTimer() {
-            if (isRunning) {
-                clearInterval(timerId);
-                isRunning = false;
-            }
-        }
-
-        function resetTimer() {
-            clearInterval(timerId);
-            timerDuration = 25 * 60; // reset to 25 minutes
-            isRunning = false;
-            updateDisplay();
-        }
-
-        function updateDisplay() {
-            let minutes = Math.floor(timerDuration / 60);
-            let seconds = timerDuration % 60;
-            document.getElementById('timer').textContent = `${padTime(minutes)}:${padTime(seconds)}`;
-            updateProgress(timerDuration);
-        }
-
-        function padTime(time) {
-            return time.toString().padStart(2, '0');
-        }
-
-        function updateProgress(timeLeft) {
-            const progress = (1 - timeLeft / totalDuration) * circumference;
-            document.getElementById('progress').style.strokeDashoffset = circumference - progress;
-        }
-    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             loadTasks();
+            updateDisplay(); // Initialize display
+            updateProgress(timeLeft); // Initialize progress circle
         });
 
         function handleKeyPress(event) {
@@ -446,60 +388,6 @@
             });
         }
     </script>
-    <script>
-        const progressCircle = document.getElementById('progress');
-let timeLeft = totalDuration;
-
-function startTimer() {
-    if (!isRunning) {
-        isRunning = true;
-        timerId = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                updateDisplay();
-                updateProgress(timeLeft);
-            } else {
-                alert('Time is up!');
-                resetTimer();
-            }
-        }, 1000);
-    }
-}
-
-function updateDisplay() {
-    let minutes = Math.floor(timeLeft / 60);
-    let seconds = timeLeft % 60;
-    document.getElementById('timer').textContent = `${padTime(minutes)}:${padTime(seconds)}`;
-}
-
-function updateProgress(timeLeft) {
-    const progress = (1 - timeLeft / totalDuration) * (2 * Math.PI * 60); // Updated to use the actual circumference
-    progressCircle.style.strokeDashoffset = 471 - progress; // Make sure this aligns with your SVG's circumference
-}
-
-function resetTimer() {
-    clearInterval(timerId);
-    timeLeft = totalDuration;
-    isRunning = false;
-    updateDisplay();
-    updateProgress(timeLeft); // Reset the progress circle to full
-}
-
-function padTime(time) {
-    return time.toString().padStart(2, '0');
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    updateDisplay(); // Initialize display
-    updateProgress(timeLeft); // Initialize progress circle
-});
-
-    </script>
-<<<<<<< HEAD
-    <script src="assets/js/studyutil.js"></script>
-=======
->>>>>>> Stashed changes
->>>>>>> 03685622146b28a9b3d2ffe9c94a7220469d0f5f
 </body>
 
 </html>
