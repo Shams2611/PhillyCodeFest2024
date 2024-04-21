@@ -41,6 +41,8 @@ class DrowsyDetection:
         
     def getCount(self):
         return self.__count.returnC()
+    def reset(self):
+        self.__count.reset()
 
 # count = Counter(0)
 """

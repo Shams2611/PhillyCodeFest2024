@@ -5,9 +5,10 @@ from drowsy_detection_code.faceSentiment import DrowsyDetection
 app = Flask(__name__, template_folder="../",static_url_path="/", static_folder="../")
 CORS(app)  # Enable CORS for all routes by default
 dd = DrowsyDetection()
-@app.route("/rerout")
+@app.route("/reroute")
 def reroute():
-    return "Go to bed"
+    dd.reset()
+    return redirect('/camera')
 
 
 @app.route("/")
@@ -17,7 +18,8 @@ def serve_index():
 
 @app.route("/camera")
 def serve_camera():
-    return render_template("/backend/testing/camera.html")
+    dd.reset()
+    return render_template("/study_planner.html")
     #return app.send_static_file("backend/testing/camera.html")
 
 @app.route('/upload-image', methods=['POST'])
@@ -26,13 +28,14 @@ def upload_image():
 
     # BytesIO
     # data = image.stream
-
+    
     # Raw bytes
     data = image.stream.read()
     dd.faceSentiBytesSrc(data)
     # print(dir(image))
     
     return jsonify({'message': 'Image uploaded successfully','count':dd.getCount(),'isTired':(dd.getCount()>=6)})
+
 
 if __name__ == "__main__":
     # Replace with your desired host and port
