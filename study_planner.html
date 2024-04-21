@@ -12,10 +12,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
-<<<<<<< HEAD
-    <link rel="icon" type="image/x-icon" href="images/markers/marker_studying.png" />
-
-=======
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/2b9cdc1c9a.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="images/markers/marker_tutoring.png" />
@@ -30,7 +26,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap"
         rel="stylesheet">
->>>>>>> 03685622146b28a9b3d2ffe9c94a7220469d0f5f
     <style>
         body > .skiptranslate {
             display: none;
@@ -74,6 +69,7 @@
 
         .todo-list {
             flex-basis: 100%;
+            flex-basis: auto;
         }
 
         video {
@@ -121,12 +117,9 @@
             gap: 10px;
         }
 
-        .todo-list {
-            width: 100%S;
-        }
 
         .todo-list {
-            flex-basis: 100%;
+            flex-basis: auto;
             padding: 20px;
             background: #f1f1f1;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -452,6 +445,55 @@
                 taskList.appendChild(taskItem);
             });
         }
+    </script>
+    <script>
+        const progressCircle = document.getElementById('progress');
+let timeLeft = totalDuration;
+
+function startTimer() {
+    if (!isRunning) {
+        isRunning = true;
+        timerId = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateDisplay();
+                updateProgress(timeLeft);
+            } else {
+                alert('Time is up!');
+                resetTimer();
+            }
+        }, 1000);
+    }
+}
+
+function updateDisplay() {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+    document.getElementById('timer').textContent = `${padTime(minutes)}:${padTime(seconds)}`;
+}
+
+function updateProgress(timeLeft) {
+    const progress = (1 - timeLeft / totalDuration) * (2 * Math.PI * 60); // Updated to use the actual circumference
+    progressCircle.style.strokeDashoffset = 471 - progress; // Make sure this aligns with your SVG's circumference
+}
+
+function resetTimer() {
+    clearInterval(timerId);
+    timeLeft = totalDuration;
+    isRunning = false;
+    updateDisplay();
+    updateProgress(timeLeft); // Reset the progress circle to full
+}
+
+function padTime(time) {
+    return time.toString().padStart(2, '0');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    updateDisplay(); // Initialize display
+    updateProgress(timeLeft); // Initialize progress circle
+});
+
     </script>
 <<<<<<< HEAD
     <script src="assets/js/studyutil.js"></script>
