@@ -2,6 +2,12 @@
 <html>
 
 <head>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <title>Study Planner</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -21,6 +27,9 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap"
         rel="stylesheet">
     <style>
+        body > .skiptranslate {
+            display: none;
+        }
         :root {
             --yellow: #FFC312;
             --yellow2: #F79F1F;
@@ -180,11 +189,15 @@
         <!-- Header -->
         <header id="header">
             <h1><a href="index.html">EqualEd Opportunity Finder</a></h1>
+            
             <nav id="nav">
                 <ul>
+                    
                     <li><a href="index.html">Home</a></li>
                     <li><a href="study_planner.html" class="active">Study Planner</a></li>
+                    
                 </ul>
+                
             </nav>
         </header>
 
@@ -192,6 +205,7 @@
         <section id="main" class="container">
             <header>
                 <h2>Study Organizer</h2>
+                <div id="google_translate_element"></div>
                 <p>Organize and manage your study sessions effectively</p>
             </header>
             <div class="box features-row">
