@@ -44,13 +44,17 @@ def upload_image():
     # Raw bytes
     data = image.stream.read()
     if dd.faceSentiBytesSrc(data) == 1:
+        was_tired = True
         session["tired_count"] += 1
+    else:
+        was_tired = False
     
     print(repr(session["tired_count"]))
     return jsonify(
         {
             "message": "Image uploaded successfully",
             "count": session["tired_count"],
+            "drowsyDetected": was_tired,
             "isTired": session["tired_count"] >= 6,
         }
     )
@@ -62,13 +66,14 @@ def chatbot_server():
             data = request.get_json()
             user_input = data["input"]
         except Exception as e:
-            print(e)
+            print("Error caught:", e)
             return jsonify({"message": "failed to parse input"}), 400
 
         output = chatbot.getOutput(user_input)
         return jsonify({"response": output})
     else:
-        return app.send_static_file("chatbot.html")
+        return jsonify({'error': 'Method Not Allowed'}), 405
+        # return app.send_static_file("chatbot.html")
 
 
 if __name__ == "__main__":

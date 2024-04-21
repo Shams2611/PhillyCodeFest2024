@@ -227,11 +227,9 @@
                     <h3>Study Session Stream</h3>
                     <video id="videoElement" autoplay></video>
                     <canvas id="canvasElement" style="display: none;"></canvas>
-                    <span id="num"></span>
-                    <span id="tired"></span>
-                    <p>Drowsiness detection active</p>
-                    <!--<span id="num"></span>-->
-                    <span id="tired"></span>
+                    <p id="drowsyStatus">Drowsiness detection Inactive</p>
+                    <!-- <span id="num"></span> -->
+                    <span id="tired">ksdkfsdjkdsfk</span>
                     <script>
 
                     </script>
@@ -288,70 +286,12 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
     <script src="assets/js/studyutil.js"></script>
-=======
->>>>>>> 03685622146b28a9b3d2ffe9c94a7220469d0f5f
-    <script>
-        let isRunning = false;
-        let timerDuration = 25 * 60; // 25 minutes
-        let totalDuration = timerDuration;
-        let timerId;
-        let completedSessions = 0;
-        const circumference = 2 * Math.PI * 60; // Circle circumference for larger progress bar
-
-        function startTimer() {
-            if (!isRunning) {
-                isRunning = true;
-                timerId = setInterval(() => {
-                    if (timerDuration > 0) {
-                        timerDuration--;
-                        updateDisplay();
-                    } else {
-                        completedSessions++;
-                        document.getElementById('completedSessions').textContent = completedSessions;
-                        resetTimer();
-                        alert('Time is up!');
-                    }
-                }, 1000);
-            }
-        }
-
-        function pauseTimer() {
-            if (isRunning) {
-                clearInterval(timerId);
-                isRunning = false;
-            }
-        }
-
-        function resetTimer() {
-            clearInterval(timerId);
-            timerDuration = 25 * 60; // reset to 25 minutes
-            isRunning = false;
-            updateDisplay();
-        }
-
-        function updateDisplay() {
-            let minutes = Math.floor(timerDuration / 60);
-            let seconds = timerDuration % 60;
-            document.getElementById('timer').textContent = `${padTime(minutes)}:${padTime(seconds)}`;
-            updateProgress(timerDuration);
-        }
-
-        function padTime(time) {
-            return time.toString().padStart(2, '0');
-        }
-
-        function updateProgress(timeLeft) {
-            const progress = (1 - timeLeft / totalDuration) * circumference;
-            document.getElementById('progress').style.strokeDashoffset = circumference - progress;
-        }
-    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             loadTasks();
+            updateDisplay(); // Initialize display
+            updateProgress(timeLeft); // Initialize progress circle
         });
 
         function handleKeyPress(event) {
@@ -446,60 +386,6 @@
             });
         }
     </script>
-    <script>
-        const progressCircle = document.getElementById('progress');
-let timeLeft = totalDuration;
-
-function startTimer() {
-    if (!isRunning) {
-        isRunning = true;
-        timerId = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                updateDisplay();
-                updateProgress(timeLeft);
-            } else {
-                alert('Time is up!');
-                resetTimer();
-            }
-        }, 1000);
-    }
-}
-
-function updateDisplay() {
-    let minutes = Math.floor(timeLeft / 60);
-    let seconds = timeLeft % 60;
-    document.getElementById('timer').textContent = `${padTime(minutes)}:${padTime(seconds)}`;
-}
-
-function updateProgress(timeLeft) {
-    const progress = (1 - timeLeft / totalDuration) * (2 * Math.PI * 60); // Updated to use the actual circumference
-    progressCircle.style.strokeDashoffset = 471 - progress; // Make sure this aligns with your SVG's circumference
-}
-
-function resetTimer() {
-    clearInterval(timerId);
-    timeLeft = totalDuration;
-    isRunning = false;
-    updateDisplay();
-    updateProgress(timeLeft); // Reset the progress circle to full
-}
-
-function padTime(time) {
-    return time.toString().padStart(2, '0');
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    updateDisplay(); // Initialize display
-    updateProgress(timeLeft); // Initialize progress circle
-});
-
-    </script>
-<<<<<<< HEAD
-    <script src="assets/js/studyutil.js"></script>
-=======
->>>>>>> Stashed changes
->>>>>>> 03685622146b28a9b3d2ffe9c94a7220469d0f5f
 </body>
 
 </html>
