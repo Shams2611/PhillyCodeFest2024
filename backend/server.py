@@ -4,6 +4,9 @@ from drowsy_detection_code.faceSentiment import DrowsyDetection
 from chatbot.bot import ChatBot
 from dotenv import load_dotenv
 from os import urandom
+from playsound import playsound
+import multiprocessing
+import time
 
 load_dotenv()
 
@@ -42,6 +45,11 @@ def upload_image():
         session["tired_count"] = 0
 
     # Raw bytes
+    if session["tired_count"]==6:
+        p = multiprocessing.Process(target=playsound, args=('PhillyCodeFest2024/backend/audio_test/608088__funwithsound__horn-14-leslie-125.mp3',))
+        p.start()
+        time.sleep(3)
+        p.terminate()
     data = image.stream.read()
     if dd.faceSentiBytesSrc(data) == 1:
         session["tired_count"] += 1
