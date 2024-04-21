@@ -6,6 +6,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="icon" type="image/x-icon" href="images/markers/marker_studying.png" />
 	<style>
 		:root {
 			--yellow: #FFC312;
@@ -357,6 +358,16 @@
 							</select>
 						</div>
 						<div class="col-12">
+							<select name="school" id="category" selected="School:">
+								<option value="">I go to:</option>
+								<option value="school_ccp">Community College of Philadelphia</option>
+								<option value="school_drexel">Drexel University</option>
+								<option value="school_temple">Temple University</option>
+								<option value="school_upenn">University of Pennsylvania</option>
+								<option value="school_none">None</option>
+							</select>
+						</div>
+						<div class="col-12">
 							<select name="subject" id="category">
 								<option value="">I need help studying:</option>
 								<option value="study_math">Math</option>
@@ -388,7 +399,7 @@
 						</div> -->
 						<div class="col-12">
 							<textarea name="message" id="message" placeholder="Additional information"
-								rows="6"></textarea>
+								rows="3"></textarea>
 						</div>
 						<div class="col-12">
 							<ul class="actions">
@@ -403,17 +414,17 @@
 
 				<form method="post" action="#">
 					<div class="row gtr-uniform gtr-50">
-						<div class="col-9 col-12-mobilep">
+						<!-- <div class="col-9 col-12-mobilep">
 							<input type="text" name="query" id="query" value="" placeholder="Query" />
-						</div>
-						<div class="col-3 col-12-mobilep">
+						</div> -->
+						<!-- <div class="col-3 col-12-mobilep">
 							<input type="submit" value="Search" class="fit" />
-						</div>
+						</div> -->
 					</div>
 				</form>
 			</section>
 
-			<section class="container">
+			<section class="box">
 				<div class="outer-container">
 					<div class="half left-half">
 						<div id="mapContainer" style="height: 100%;">
@@ -427,6 +438,7 @@
 						<!-- <img class="info-img" src="0525182029_HDR.jpg" alt=""> -->
 						<div class="right-header">
 							<span id="locationNameLabel">The Korman Center</span>
+							<br>
 							<div class="star-row">
 								<!-- <span id="locationRatingLabel">3.5</span> -->
 								<div id="star1">

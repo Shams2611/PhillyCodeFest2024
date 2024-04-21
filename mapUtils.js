@@ -81,7 +81,7 @@ function getRandomNumber(min, max) {
 let i = 0
 let ind = 0
 
-function getData() {
+function getData(info) {
     const xhttp = new XMLHttpRequest();
     xhttp.responseType = "json";
     xhttp.onload = function () {
@@ -96,34 +96,71 @@ function getData() {
                 const latitude = parseFloat(latStr);
                 const longitude = parseFloat(longStr);
 
-                var coords = [latitude + (Math.floor(Math.random() * 11) - 5) * 0.0001, longitude + (Math.floor(Math.random() * 11) - 5) * 0.0001]
+                var coords = [latitude + (Math.floor(Math.random() * 11) - 5) * 0.00003, longitude + (Math.floor(Math.random() * 11) - 5) * 0.00003]
                 var dist = calculateDistance(startCoords, coords)
                 //change these lines to make the icon different
                 // var ind = Math.min(Math.floor(dist / 2.5), 3);
                 // var ind = getRandomNumber(0, 3)
+                thing.ind = 0
                 switch (thing.type) {
                     case "study":
-                        ind = 0;
+                        thing.ind = 0;
                         break;
                     case "tutor":
-                        ind = 1;
+                        thing.ind = 1;
                         break;
                     case "career":
-                        ind = 2;
+                        thing.ind = 2;
                         break;
                     case "scholarship":
-                        ind = 3;
+                        thing.ind = 3;
                         break;
                 }
-                // if(dist > 5){
-                //     ind+=4
+                let relevant = true
+                //decide if it's relevant
+                //name, age, gender, school, subject, additional
+                //0   ,   1,      2,      3,       4,          5
+                if (info) {
+                    // console.log("hello")
+                    // console.log('math', thing.math, (thing.math == 'no'))
+                    console.log(info[4])
+                    console.log(thing.math)
+                    switch (info[4]) {
+                        case "study_math":
+                            if (thing.math == 'no') {
+                                relevant = false
+                            }
+                            break;
+                        case "study_science":
+                            if (thing.science == 'no') {
+                                relevant = false
+                            }
+                            break;
+                        case "study_english":
+                            if (thing.english == 'no') {
+                                relevant = false
+                            }
+                            break;
+                        case "study_arts":
+                            if (thing.arts == 'no') {
+                                relevant = false
+                            }
+                            break;
+                    }
+                }
+
+                // if(relevant){
+
                 // }
+
+                if (!relevant) {
+                    thing.ind += 4
+                }
                 // console.log("-"+coords+"-"+i++)
-                var newMarker = new L.marker(coords, { icon: iconsList[ind] })
-                markers[ind].push(newMarker)
+                var newMarker = new L.marker(coords, { icon: iconsList[thing.ind] })
+                markers[thing.ind].push(newMarker)
                 newMarker.addTo(map).on("click", function (e) {
-                    console.log(ind)
-                    routeToPoint(coords, markerColors[ind])
+                    routeToPoint(coords, markerColors[thing.ind % 4])
                     validateCheck("math", thing.math)
                     validateCheck("science", thing.science)
                     validateCheck("english", thing.english)
@@ -131,10 +168,10 @@ function getData() {
                     locationNameLabel.innerText = thing.name
                     locationTypeLabel.innerText = capitalizeWords(thing.type)
                     locationAddressLabel.innerText = thing.address
-                    for(let i = 0; i<5; i++){
+                    for (let i = 0; i < 5; i++) {
                         evaluateStar(thing.rating, i)
                     }
-                    infoImg.style = "background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url('"+thing.cover+"')";
+                    infoImg.style = "background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)), url('" + thing.cover + "')";
                 })
             })
         }
@@ -159,31 +196,31 @@ function validateCheck(name, val) {
     check = document.getElementById(name + "-check")
     x = document.getElementById(name + "-x")
     if (val == "yes") {
-        x.style = "display: block;"
-        check.style = "display: none;"
+        check.style = "display: block;"
+        x.style = "display: none;"
     }
     else {
-        x.style = "display: none;"
-        check.style = "display: block;"
+        check.style = "display: none;"
+        x.style = "display: block;"
     }
 }
 
 function evaluateStar(rating, index) {
-    num = rating-index
-    
-    divElement = document.getElementById("star"+(index+1))
+    num = rating - index
+
+    divElement = document.getElementById("star" + (index + 1))
     children = divElement.children
     children[0].style = "display: none;"
     children[1].style = "display: none;"
     children[2].style = "display: none;"
     //this is very bad code please fix later
-    if(num >= 1){
+    if (num >= 1) {
         children[0].style = "display: block;"
     }
-    else if (num >= 0.5){
+    else if (num >= 0.5) {
         children[1].style = "display: block;"
     }
-    else{
+    else {
         children[2].style = "display: block;"
     }
 }
@@ -289,7 +326,7 @@ var start = L.marker(startCoords, { icon: startIcon }).addTo(map);
 
 // $scope.routingControl;
 
-let route = null;
+let routingControl;
 
 function routeToPoint(coords, lineColor) {
     // map.eachLayer((layer) => {
@@ -307,7 +344,9 @@ function routeToPoint(coords, lineColor) {
     //     map.removeControl($scope.routingControl);
     //   });
     // };
-    route = L.Routing.control({
+    removeRoute()
+
+    routingControl = L.Routing.control({
         waypoints: [
             L.latLng(start.getLatLng()),
             L.latLng(coords)
@@ -325,12 +364,45 @@ function routeToPoint(coords, lineColor) {
     }).addTo(map);
 }
 
+function removeRoute() {
+    if (routingControl) {
+        map.removeControl(routingControl);
+        map.removeLayer(routingControl._line);
+        routingControl = null; // Reset the routing control variable
+    }
+}
+
+function removeMarkers() {
+    // Loop through the markers array and remove each marker from the map
+    markers.forEach((lis) => {
+        lis.forEach((element) => {
+            map.removeLayer(element)
+        })
+    })
+    // for (let i = 0; i < markers.length; i++) {
+    //   map.removeLayer(markers[i]);
+    // }
+
+    // Clear the markers array
+    markers = [[], [], [], []];
+}
+
 var form = document.getElementById("information");
 function getFormData(event) {
-  event.preventDefault();
-  info = Array.prototype.slice.call(form.elements, 0, 5);
-  Array.prototype.forEach.call(info, item => {
-    console.log(item.value); //to get the form values 
-  });
+    event.preventDefault();
+    info = Array.prototype.slice.call(form.elements, 0, 6);
+    // Array.prototype.forEach.call(info, item => {
+    //     console.log(item.value); //to get the form values 
+
+    //     //wipe the screen
+    // });
+    for (let i = 0; i < info.length; i++) {
+        info[i] = info[i].value;
+    }
+    console.log(info)
+    removeMarkers()
+    removeRoute()
+    //get the markers again, but with parameters
+    getData(info)
 }
 form.addEventListener('submit', getFormData);
