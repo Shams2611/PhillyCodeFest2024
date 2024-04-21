@@ -1,42 +1,72 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <title>Study Planner</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
-    	<!-- font awesome -->
-	<script src="https://kit.fontawesome.com/2b9cdc1c9a.js" crossorigin="anonymous"></script>
-	<link rel="icon" type="image/x-icon" href="images/markers/marker_tutoring.png" />
-
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/2b9cdc1c9a.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="images/markers/marker_tutoring.png" />
+    <!-- roboto mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <!-- roboto slab -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap"
+        rel="stylesheet">
     <style>
+        :root {
+            --yellow: #FFC312;
+            --yellow2: #F79F1F;
+            --blue: #12CBC4;
+            --blue2: #1289A7;
+            --red: #EE5A24;
+            --red2: #EA2027;
+            --green: #C4E538;
+            --green2: #A3CB38;
+        }
+
         .features-row {
             display: flex;
             justify-content: space-between;
             padding: 20px;
             flex-wrap: wrap;
         }
+
         .box {
             margin-bottom: 20px;
         }
-        .video-stream, .pomodoro-timer, .todo-list {
+
+        .video-stream,
+        .pomodoro-timer,
+        .todo-list {
             flex-basis: calc(50% - 10px);
             margin: 5px;
             background: #f8f8f8;
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center align all items */
+            align-items: center;
+            /* Center align all items */
         }
+
         .todo-list {
             flex-basis: 100%;
         }
+
         video {
             width: 100%;
             height: auto;
         }
+
         /* Style for circular progress bar */
         .progress-circle {
             width: 150px;
@@ -44,39 +74,51 @@
             transform: rotate(-90deg);
             margin-bottom: 10px;
         }
+
         .progress-circle-bg,
         .progress-circle-fg {
             fill: none;
             stroke-width: 12;
         }
+
         .progress-circle-bg {
             stroke: #eee;
         }
+
         .progress-circle-fg {
             stroke: #f77;
-            stroke-dasharray: 471px; /* Adjusted for new radius */
-            stroke-dashoffset: 471px; /* Adjusted for new radius */
+            stroke-dasharray: 471px;
+            /* Adjusted for new radius */
+            stroke-dashoffset: 471px;
+            /* Adjusted for new radius */
             transition: stroke-dashoffset 0.5s;
         }
+
         #timer {
-            font-size: 2em; /* Larger font size for timer */
-            margin-bottom: 10px; /* Spacing between timer and buttons */
+            font-size: 2em;
+            /* Larger font size for timer */
+            margin-bottom: 10px;
+            /* Spacing between timer and buttons */
         }
+
         .button-group {
             display: flex;
             justify-content: center;
             gap: 10px;
         }
-        .todo-list{
+
+        .todo-list {
             width: 100%S;
         }
+
         .todo-list {
             flex-basis: 100%;
             padding: 20px;
             background: #f1f1f1;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+
         .task-list-item {
             background: #ffffff;
             border-radius: 5px;
@@ -86,30 +128,58 @@
             align-items: center;
             justify-content: space-between;
         }
+
         .task-text {
             flex-grow: 1;
         }
+
         .completed {
             text-decoration: line-through;
             color: #ccc;
         }
+
         input[type="text"] {
             padding: 10px;
             margin: 10px 0;
             width: calc(100% - 22px);
             box-sizing: border-box;
         }
+
         button {
             cursor: pointer;
+            padding: 1rem;
+            border: 0;
+            border-radius: 1rem;
+        }
+        #playBtn{
+            background-color: var(--green);
+        }
+        #pauseBtn{
+            background-color: var(--yellow);
+        }
+        #resetBtn{
+            background-color: var(--red);
+        }
+        #playBtn, #pauseBtn, #resetBtn{
+            transition: 0.5s;
+            width: 4rem;
+        }
+        #playBtn:hover, #pauseBtn:hover, #resetBtn:hover{
+            background-color: white;
+        }
+
+        body {
+            font-family: "Roboto Slab";
         }
     </style>
 </head>
+
 <body class="is-preload">
     <div id="page-wrapper">
 
         <!-- Header -->
         <header id="header">
-            <h1><a href="index.html">Opportunity Finder</a></h1>
+            <h1><a href="index.html">EqualEd Opportunity Finder</a></h1>
             <nav id="nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -135,23 +205,29 @@
                     <!--<span id="num"></span>-->
                     <span id="tired"></span>
                     <script>
-                        
-                      </script>
+
+                    </script>
                 </section>
                 <section class="pomodoro-timer">
                     <h3>Pomodoro Timer</h3>
                     <svg class="progress-circle">
-                        <circle class="progress-circle-bg" cx="75" cy="75" r="60"/>
-                        <circle class="progress-circle-fg" cx="75" cy="75" r="60" id="progress"/>
+                        <circle class="progress-circle-bg" cx="75" cy="75" r="60" />
+                        <circle class="progress-circle-fg" cx="75" cy="75" r="60" id="progress" />
                     </svg>
                     <p id="timer">25:00</p>
                     <div class="button-group">
-                        <button onclick="startTimer()">Start</button>
-                        <button onclick="pauseTimer()">Pause</button>
-                        <button onclick="resetTimer()">Reset</button>
+                        <button id="playBtn" onclick="startTimer()">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <button id="pauseBtn" onclick="pauseTimer()">
+                            <i class="fa-solid fa-pause"></i>
+                        </button>
+                        <button id="resetBtn" onclick="resetTimer()">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
                     </div>
-                    <p>Sessions completed: <span id="completedSessions">0</span></p>
-                    <p>Timer: 25:00</p>
+                    <!-- <p>Sessions completed: <span id="completedSessions">0</span></p> -->
+                    <!-- <p>Timer: 25:00</p> -->
                 </section>
                 <div class="box features-row">
                     <section class="todo-list">
@@ -184,6 +260,162 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+<<<<<<< Updated upstream
     <script src="assets/js/studyutil.js"></script>
+=======
+    <script>
+        let isRunning = false;
+        let timerDuration = 25 * 60; // 25 minutes
+        let totalDuration = timerDuration;
+        let timerId;
+        let completedSessions = 0;
+        const circumference = 2 * Math.PI * 60; // Circle circumference for larger progress bar
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                timerId = setInterval(() => {
+                    if (timerDuration > 0) {
+                        timerDuration--;
+                        updateDisplay();
+                    } else {
+                        completedSessions++;
+                        document.getElementById('completedSessions').textContent = completedSessions;
+                        resetTimer();
+                        alert('Time is up!');
+                    }
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            if (isRunning) {
+                clearInterval(timerId);
+                isRunning = false;
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerId);
+            timerDuration = 25 * 60; // reset to 25 minutes
+            isRunning = false;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            let minutes = Math.floor(timerDuration / 60);
+            let seconds = timerDuration % 60;
+            document.getElementById('timer').textContent = `${padTime(minutes)}:${padTime(seconds)}`;
+            updateProgress(timerDuration);
+        }
+
+        function padTime(time) {
+            return time.toString().padStart(2, '0');
+        }
+
+        function updateProgress(timeLeft) {
+            const progress = (1 - timeLeft / totalDuration) * circumference;
+            document.getElementById('progress').style.strokeDashoffset = circumference - progress;
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadTasks();
+        });
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                addTask();
+            }
+        }
+
+        function addTask() {
+            const taskInput = document.getElementById('newTask');
+            const newTaskText = taskInput.value.trim();
+            if (newTaskText) {
+                const taskList = document.getElementById('taskList');
+                const taskItem = document.createElement('li');
+                taskItem.className = 'task-list-item';
+
+                const textSpan = document.createElement('span');
+                textSpan.textContent = newTaskText;
+                textSpan.className = 'task-text';
+
+                const checkButton = document.createElement('button');
+                // checkButton.textContent = 'Done';
+                checkButton.innerHTML = "<i class='fa-solid fa-flag-checkered'></i>"
+                checkButton.onclick = function () {
+                    textSpan.classList.toggle('completed');
+                };
+
+                const deleteButton = document.createElement('button');
+                // deleteButton.textContent = 'Delete';
+                deleteButton.innerHTML = "<i class='fa-solid fa-trash-can'></i>"
+                deleteButton.onclick = function () {
+                    taskList.removeChild(taskItem);
+                };
+
+                taskItem.appendChild(textSpan);
+                taskItem.appendChild(checkButton);
+                taskItem.appendChild(deleteButton);
+                taskList.appendChild(taskItem);
+
+                taskInput.value = ''; // Clear the input field
+
+                saveTasks();
+            }
+        }
+
+        function saveTasks() {
+            const tasks = [];
+            document.querySelectorAll('.task-text').forEach(task => {
+                tasks.push({
+                    text: task.textContent,
+                    completed: task.classList.contains('completed')
+                });
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.forEach(task => {
+                const taskList = document.getElementById('taskList');
+                const taskItem = document.createElement('li');
+                taskItem.className = 'task-list-item';
+
+                const textSpan = document.createElement('span');
+                textSpan.textContent = task.text;
+                textSpan.className = 'task-text';
+                if (task.completed) {
+                    textSpan.classList.add('completed');
+                }
+
+                const checkButton = document.createElement('button');
+                // checkButton.textContent = 'Done';
+                checkButton.innerHTML = "<i class='fa-solid fa-flag-checkered'></i>"
+                checkButton.onclick = function () {
+                    textSpan.classList.toggle('completed');
+                    saveTasks();
+                };
+
+                const deleteButton = document.createElement('button');
+                // deleteButton.textContent = 'Delete';
+                deleteButton.innerHTML = "<i class='fa-solid fa-trash-can'></i>"
+
+                deleteButton.onclick = function () {
+                    taskList.removeChild(taskItem);
+                    saveTasks();
+                };
+
+                taskItem.appendChild(textSpan);
+                taskItem.appendChild(checkButton);
+                taskItem.appendChild(deleteButton);
+                taskList.appendChild(taskItem);
+            });
+        }
+    </script>
+>>>>>>> Stashed changes
 </body>
+
 </html>

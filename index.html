@@ -239,6 +239,30 @@
 			height: 5rem;
 			width: 5rem;
 		}
+		#chatContainer {
+            display: flex;
+            gap: .5rem;
+        }
+        #chatIcon{
+            height: 2rem;
+        }
+        #iconCol{
+            justify-content: end;
+        }
+        #chatCol{
+            background-color: white;
+            border: .2rem var(--blue2) solid;
+            flex: 1;
+            border-radius: 0.5rem;
+            height: 20rem;
+            padding: 1rem;
+        }
+        #chatHeader{
+            text-decoration: underline var(--blue2) .2rem;
+            text-underline-offset: .4rem;
+			color: var(--blue2);
+			font-weight: bolder;
+        }
 	</style>
 	<!-- <link rel="stylesheet" href="styles.css"> -->
 	<!-- leaflet css sheet -->
@@ -278,7 +302,7 @@
 
 		<!-- Header -->
 		<header id="header" class="alt">
-			<h1><a href="index.html">Opportunity Finder</a></h1>
+			<h1><a href="index.html">EqualEd Opportunity Finder</a></h1>
 			<nav id="nav">
 				<ul>
 					<li><a href="index.html">Home</a></li>
@@ -292,7 +316,7 @@
 			<h2 style="font-weight:600;">Equal<span style="color: var(--yellow);">Ed</span></h2>
 			<p>Unlock your potential with personalized educational opportunities.</p>
 			<ul class="actions special">
-				<li><a href="#" class="button primary">Get Started</a></li>
+				<!-- <li><a href="#" class="button primary">Get Started</a></li> -->
 			</ul>
 		</section>
 		
@@ -550,7 +574,20 @@
 			</section>
 			<!-- <br> -->
 			<!-- Recommendations -->
+			<section class="box">
+				<div id="chatContainer">
+					<div id="iconCol">
+						<img id="chatIcon" src="images/icons/marker_robot.png">
+					</div>
+					<div id="chatCol">
+						<span id="chatHeader">Smart Resource Summary</span>
+						<br>
+						<span id="generatedChat">Fill out the form to generate smart resources.</span>
+					</div>
+				</div>
+			</section>
 		</section>
+		
 	</section>
 
 		<!-- CTA -->
