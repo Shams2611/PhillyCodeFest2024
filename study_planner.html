@@ -22,6 +22,9 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center align all items */
         }
         .todo-list {
             flex-basis: 100%;
@@ -29,6 +32,36 @@
         video {
             width: 100%;
             height: auto;
+        }
+        /* Style for circular progress bar */
+        .progress-circle {
+            width: 150px;
+            height: 150px;
+            transform: rotate(-90deg);
+            margin-bottom: 10px;
+        }
+        .progress-circle-bg,
+        .progress-circle-fg {
+            fill: none;
+            stroke-width: 12;
+        }
+        .progress-circle-bg {
+            stroke: #eee;
+        }
+        .progress-circle-fg {
+            stroke: #f77;
+            stroke-dasharray: 471px; /* Adjusted for new radius */
+            stroke-dashoffset: 471px; /* Adjusted for new radius */
+            transition: stroke-dashoffset 0.5s;
+        }
+        #timer {
+            font-size: 2em; /* Larger font size for timer */
+            margin-bottom: 10px; /* Spacing between timer and buttons */
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
     </style>
 </head>
@@ -60,8 +93,17 @@
                 </section>
                 <section class="pomodoro-timer">
                     <h3>Pomodoro Timer</h3>
-                    <p>25:00</p>
-                    <button>Start</button>
+                    <svg class="progress-circle">
+                        <circle class="progress-circle-bg" cx="75" cy="75" r="60"/>
+                        <circle class="progress-circle-fg" cx="75" cy="75" r="60" id="progress"/>
+                    </svg>
+                    <p id="timer">25:00</p>
+                    <div class="button-group">
+                        <button onclick="startTimer()">Start</button>
+                        <button onclick="pauseTimer()">Pause</button>
+                        <button onclick="resetTimer()">Reset</button>
+                    </div>
+                    <p>Sessions completed: <span id="completedSessions">0</span></p>
                 </section>
                 <section class="todo-list">
                     <h3>To-Do List</h3>
@@ -75,11 +117,7 @@
 
         <!-- Footer -->
         <footer id="footer">
-            <ul class="icons">
-                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" the="icon brands fa-instagram"><span the="label">Instagram</span></a></li>
-            </ul>
+            
             <ul class="copyright">
                 <li>&copy; Untitled. All rights reserved.</li>
                 <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
@@ -96,5 +134,60 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        let isRunning = false;
+        let timerDuration = 25 * 60; // 25 minutes
+        let totalDuration = timerDuration;
+        let timerId;
+        let completedSessions = 0;
+        const circumference = 2 * Math.PI * 60; // Circle circumference for larger progress bar
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                timerId = setInterval(() => {
+                    if (timerDuration > 0) {
+                        timerDuration--;
+                        updateDisplay();
+                    } else {
+                        completedSessions++;
+                        document.getElementById('completedSessions').textContent = completedSessions;
+                        resetTimer();
+                        alert('Time is up!');
+                    }
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            if (isRunning) {
+                clearInterval(timerId);
+                isRunning = false;
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerId);
+            timerDuration = 25 * 60; // reset to 25 minutes
+            isRunning = false;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            let minutes = Math.floor(timerDuration / 60);
+            let seconds = timerDuration % 60;
+            document.getElementById('timer').textContent = `${padTime(minutes)}:${padTime(seconds)}`;
+            updateProgress(timerDuration);
+        }
+
+        function padTime(time) {
+            return time.toString().padStart(2, '0');
+        }
+
+        function updateProgress(timeLeft) {
+            const progress = (1 - timeLeft / totalDuration) * circumference;
+            document.getElementById('progress').style.strokeDashoffset = circumference - progress;
+        }
+    </script>
 </body>
 </html>
