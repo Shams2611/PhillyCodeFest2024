@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, render_template, redirect, Response, session
 from flask_cors import CORS
 from drowsy_detection_code.faceSentiment import DrowsyDetection
+from chatbot.bot import ChatBot
 from dotenv import load_dotenv
 from os import urandom
 
@@ -8,7 +9,9 @@ load_dotenv()
 
 app = Flask(__name__, template_folder="../", static_url_path="/", static_folder="../")
 CORS(app)  # Enable CORS for all routes by default
+
 dd = DrowsyDetection()
+chatbot = ChatBot()
 
 app.secret_key = urandom(32)
 
@@ -51,6 +54,21 @@ def upload_image():
             "isTired": session["tired_count"] >= 6,
         }
     )
+
+@app.route("/testchat", methods=["GET", "POST"])
+def chatbot_server():
+    if request.method == "POST":
+        try:
+            data = request.get_json()
+            user_input = data["input"]
+        except Exception as e:
+            print(e)
+            return jsonify({"message": "failed to parse input"}), 400
+
+        output = chatbot.getOutput(user_input)
+        return jsonify({"response": output})
+    else:
+        return app.send_static_file("chatbot.html")
 
 
 if __name__ == "__main__":
