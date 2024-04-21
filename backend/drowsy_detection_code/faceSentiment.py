@@ -3,6 +3,7 @@ import boto3
 # import io
 # import senti
 import pprint
+import os
 
 class Counter:
     def __init__(self,c) -> None:
@@ -16,7 +17,7 @@ class Counter:
 
 class DrowsyDetection:
     def __init__(self):
-        self.__recog = boto3.client('rekognition', region_name='us-east-1')
+        self.__recog = boto3.client('rekognition', region_name='us-east-1', aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"], aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"])
         self.__count = Counter(0)
 
     def faceSentiBytesSrc(self, source):
@@ -41,6 +42,9 @@ class DrowsyDetection:
         
     def getCount(self):
         return self.__count.returnC()
+    
+    def reset(self):
+        self.__count.reset()
 
 # count = Counter(0)
 """
