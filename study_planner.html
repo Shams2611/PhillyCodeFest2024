@@ -124,7 +124,25 @@
                 <section class="pomodoro-timer">
                     <h3>Pomodoro Timer</h3>
                     <p>25:00</p>
-                    <button onclick="window.location.href='/reroute'"> Start </button>
+                    <!-- <button onclick="window.location.href='/reroute'"> Start </button> -->
+                    <button id="postButton"> Start </button>
+                    <script>
+                        document.getElementById('postButton').addEventListener('click', function() {
+                            fetch('/reset', {
+                                method: 'POST'
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                console.log('POST request successful');
+                                } else {
+                                console.error('POST request failed');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                            });
+                    </script>
                 </section>
                 <section class="todo-list">
                     <h3>To-Do List</h3>

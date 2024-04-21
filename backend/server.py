@@ -1,22 +1,24 @@
-from flask import Flask, jsonify, request, render_template,redirect
+from flask import Flask, jsonify, request, render_template, redirect, Response
 from flask_cors import CORS
 from drowsy_detection_code.faceSentiment import DrowsyDetection
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__, template_folder="../",static_url_path="/", static_folder="../")
 CORS(app)  # Enable CORS for all routes by default
 dd = DrowsyDetection()
-@app.route("/reroute")
+@app.route("/reset", methods=["POST"])
 def reroute():
     dd.reset()
-    return redirect('/camera')
-
+    return Response(status=200)
 
 @app.route("/")
 def serve_index():
     """ Serves the index.html file on the default server route """
     return app.send_static_file("index.html")
 
-@app.route("/camera")
+@app.route("/study_planner")
 def serve_camera():
     dd.reset()
     return render_template("/study_planner.html")
