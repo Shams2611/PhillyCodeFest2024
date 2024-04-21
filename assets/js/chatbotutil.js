@@ -1,5 +1,5 @@
-function sendChat(event) {
-    const msg = document.getElementById('user_input').value;
+function sendRonald() {
+    const msg = document.getElementById('chatInp').value;
     const data = {
         input: msg
     };
@@ -14,7 +14,7 @@ function sendChat(event) {
         .then(response => response.json())
         .then(result => {
             console.log(result)
-            document.getElementById('res_concat').textContent += result.response;
+            document.getElementById('chatResponse').textContent = result.response;
         })
         .catch(error => {
             console.error(error);
