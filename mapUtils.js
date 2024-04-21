@@ -116,34 +116,36 @@ function getData(info) {
                         thing.ind = 3;
                         break;
                 }
-                let relevant = true
+                thing.relevant = true
                 //decide if it's relevant
                 //name, age, gender, school, subject, additional
                 //0   ,   1,      2,      3,       4,          5
                 if (info) {
-                    // console.log("hello")
-                    // console.log('math', thing.math, (thing.math == 'no'))
-                    console.log(info[4])
-                    console.log(thing.math)
-                    switch (info[4]) {
-                        case "study_math":
-                            if (thing.math == 'no') {
-                                relevant = false
+                    let studyFocus = info[4]
+                    // console.log(studyFocus)
+                    // // if(studyFocus=="math" && thing.math != "yes"){
+                    // //     console.log("hey!")
+                    // //     thing.relevant = false
+                    // // }
+                    switch (studyFocus) {
+                        case "math":
+                            if (thing.math != 'yes') {
+                                thing.relevant = false
                             }
                             break;
-                        case "study_science":
-                            if (thing.science == 'no') {
-                                relevant = false
+                        case "science":
+                            if (thing.science != 'yes') {
+                                thing.relevant = false
                             }
                             break;
-                        case "study_english":
-                            if (thing.english == 'no') {
-                                relevant = false
+                        case "english":
+                            if (thing.english != 'yes') {
+                                thing.relevant = false
                             }
                             break;
-                        case "study_arts":
-                            if (thing.arts == 'no') {
-                                relevant = false
+                        case "arts":
+                            if (thing.arts != 'yes') {
+                                thing.relevant = false
                             }
                             break;
                     }
@@ -153,11 +155,13 @@ function getData(info) {
 
                 // }
 
-                if (!relevant) {
-                    thing.ind += 4
+                if (!thing.relevant) {
+                    console.log("not relevant")
+                    // thing.ind += 4
                 }
                 // console.log("-"+coords+"-"+i++)
-                var newMarker = new L.marker(coords, { icon: iconsList[thing.ind] })
+                console.log(thing.ind)
+                var newMarker = new L.marker(coords, { icon: iconsList[thing.relevant ? thing.ind : thing.ind + 4] })
                 markers[thing.ind].push(newMarker)
                 newMarker.addTo(map).on("click", function (e) {
                     routeToPoint(coords, markerColors[thing.ind % 4])
