@@ -4,17 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< Updated upstream
-    <title>Chatbot Test</title>
-</head>
-
-<body>
-    <input type="text" id="user_input" name="message" placeholder="Send message" required>
-    <button onclick="sendChat()">Send</button>
-    <br><span id="res_concat">Results: </span>
-
-    <script src="assets/js/chatbotutil.js"></script>
-=======
     <title>Document</title>
     <style>
         #chatContainer {
@@ -28,10 +17,16 @@
             justify-content: end;
         }
         #chatCol{
-            background-color: red;
+            background-color: white;
+            border: .2rem black solid;
             flex: 1;
             border-radius: 0.5rem;
             height: 20rem;
+            padding: 1rem;
+        }
+        #chatHeader{
+            text-decoration: underline .2rem;
+            text-underline-offset: .4rem;
         }
     </style>
 </head>
@@ -39,13 +34,14 @@
 <body>
     <div id="chatContainer">
         <div id="iconCol">
-            <img id="chatIcon" src="images/icons/icon_check.png">
+            <img id="chatIcon" src="images/icons/marker_robot.png">
         </div>
         <div id="chatCol">
-            adsfasdfadsfsafd
+            <span id="chatHeader">Smart Resource Summary</span>
+            <br><br>
+            <span id="generatedChat">Fill out the form to generate smart resources.</span>
         </div>
     </div>
->>>>>>> Stashed changes
 </body>
 
 </html>
