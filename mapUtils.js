@@ -63,6 +63,12 @@ let locationCampusLabel = document.getElementById("locationCampusLabel")
 let scoreFill = document.getElementById("scoreFill")
 let scoreNumber = document.getElementById("scoreNumber")
 
+let mathRow = document.getElementById("mathRow")
+let scienceRow = document.getElementById("scienceRow")
+let englishRow = document.getElementById("englishRow")
+let artsRow = document.getElementById("mathRow")
+
+
 // console.log(infoImg)
 
 function addRandomOffset(coordinates) {
@@ -174,15 +180,35 @@ function getData(info) {
                         thing.relevant = false;
                         thing.relevancy-=15
                     }
-
                     console.log(thing.relevancy)
                     // if()
                 }
+
+                thing.relevancy-=(dist*30)
+                thing.relevancy+=getRandomNumber(1,10)
+
+                if(thing.relevancy>100){
+                    thing.relevancy = 100
+                }
+                else if(thing.relevancy<0){
+                    thing.relevancy = 0
+                }
+
+                if(thing.relevancy < 40){
+                    thing.relevant = false;
+                }
+
                 // console.log("-"+coords+"-"+i++)
                 console.log(thing.ind)
                 var newMarker = new L.marker(coords, { icon: iconsList[thing.relevant ? thing.ind : thing.ind + 4] })
                 markers[thing.ind].push(newMarker)
                 newMarker.addTo(map).on("click", function (e) {
+
+                    mathRow.style = thing.math == "n/a" ? "display: none;" : "display: flex";
+                    scienceRow.style = thing.science == "n/a" ? "display: none;" : "display: flex";
+                    englishRow.style = thing.english == "n/a" ? "display: none;" : "display: flex";
+                    artsRow.style = thing.arts == "n/a" ? "display: none;" : "display: flex";
+
                     routeToPoint(coords, markerColors[thing.ind % 4])
                     validateCheck("math", thing.math)
                     validateCheck("science", thing.science)
@@ -196,12 +222,12 @@ function getData(info) {
                     if(thing.relevancy >= 33){
                         fillColor = "#FFC312"
                     }
-                    else if(thing.relevancy >= 66){
+                    if(thing.relevancy >= 66){
                         fillColor = "#C4E538"
                     }
 
                     scoreFill.style = "width: "+thing.relevancy+"%; background-color: "+fillColor+";";
-                    scoreNumber.innerText = thing.relevancy
+                    scoreNumber.innerText = thing.relevancy.toFixed(2)
 
                     for (let i = 0; i < 5; i++) {
                         evaluateStar(thing.rating, i)

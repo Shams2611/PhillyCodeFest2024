@@ -100,7 +100,7 @@
 		}
 
 		.prog-bar-fill {
-			background-color: var(--yellow);
+			/* background-color: var(--yellow); */
 			border-radius: 1rem;
 			height: .5rem;
 			transition: width 2s;
@@ -472,7 +472,7 @@
 						<div class="right-row">
 							Relevancy score:
 							<div class="prog-bar-container">
-								<div id="scoreFill" class="prog-bar-fill" style="width:100%"></div>
+								<div id="scoreFill" class="prog-bar-fill" style="width:100%; background-color: #C4E538;"></div>
 							</div>
 							<span id="scoreNumber">100</span>%
 						</div>
@@ -482,7 +482,7 @@
 						<div id="campusRow" class="right-row">
 							Campus:<span id="locationCampusLabel">Drexel</span>
 						</div>
-						<div class="right-row">
+						<div id="mathRow" class="right-row">
 							Math:
 							<img id="math-check" class = "right-row-img" src="images/icons/icon_check.png">
 							<img style="display: none;"id="math-x" class = "right-row-img" src="images/icons/icon_x.png">
@@ -490,17 +490,17 @@
 								<div class="prog-bar-fill" style="width:100%"></div>
 							</div> -->
 						</div>
-						<div class="right-row">
+						<div id="scienceRow" class="right-row">
 							Science:
 							<img id="science-check"class = "right-row-img" src="images/icons/icon_check.png">
 							<img style="display: none;" id="science-x"class = "right-row-img" src="images/icons/icon_x.png">
 						</div>
-						<div class="right-row">
+						<div id="englishRow" class="right-row">
 							English:
 							<img id="english-check" class = "right-row-img" src="images/icons/icon_check.png">
 							<img style="display:none;"id="english-x" class = "right-row-img" src="images/icons/icon_x.png">
 						</div>
-						<div class="right-row">
+						<div id="artsRow" class="right-row">
 							Arts:
 							<img style="display: none;"id="arts-check" class = "right-row-img" src="images/icons/icon_check.png">
 							<img id="arts-x" class = "right-row-img" src="images/icons/icon_x.png">
