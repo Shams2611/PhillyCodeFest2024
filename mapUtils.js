@@ -473,7 +473,52 @@ function getFormData(event) {
     console.log(info)
     removeMarkers()
     removeRoute()
+
+    //info
+    //name, age, gender, school, subject, additional
+    //0   ,   1,      2,      3,       4,          5
+    //
+
+
     //get the markers again, but with parameters
     getData(info)
+    sendChat(info)
 }
 form.addEventListener('submit', getFormData);
+
+function sendChat(info) {
+
+    // const msg = document.getElementById(info[0]).value;
+    //format this later
+
+    //name, age, gender, school, subject, additional
+    //0   ,   1,      2,      3,       4,          5
+    //
+
+    // "prompt": f"i am a highschool senior/college student{" named " + addinfo if addinfo is not None else ""}. 
+    // Why do you think {studycenter} is a good place to study? Please tell me only 60 words and be a bit specific 
+    // about the building and talk about which college majors usually study there",
+
+    const data = {
+        input: `I am looking for educational opportunities. I am a ${info[1]} year old named ${info[0]}
+        and I go to the school ${info[3]} and I am trying to find resources related to ${info[4]}. My gender is ${info[2]}. Some additional information to consider is that
+        ${info[5]}. Please address me by name, and tell me about a resource that is available to me in around 50 words.
+        be a bit specific in the response, and don't include a preamble to the response.`
+    };
+
+    fetch('/testchat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result)
+            document.getElementById('generatedChat').textContent += result.response;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
