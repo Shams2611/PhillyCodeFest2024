@@ -101,18 +101,19 @@ function getData() {
                 //change these lines to make the icon different
                 // var ind = Math.min(Math.floor(dist / 2.5), 3);
                 // var ind = getRandomNumber(0, 3)
+                thing.ind = -1
                 switch (thing.type) {
                     case "study":
-                        ind = 0;
+                        thing.ind = 0;
                         break;
                     case "tutor":
-                        ind = 1;
+                        thing.ind = 1;
                         break;
                     case "career":
-                        ind = 2;
+                        thing.ind = 2;
                         break;
                     case "scholarship":
-                        ind = 3;
+                        thing.ind = 3;
                         break;
                 }
                 // if(dist > 5){
@@ -122,8 +123,7 @@ function getData() {
                 var newMarker = new L.marker(coords, { icon: iconsList[ind] })
                 markers[ind].push(newMarker)
                 newMarker.addTo(map).on("click", function (e) {
-                    console.log(ind)
-                    routeToPoint(coords, markerColors[ind])
+                    routeToPoint(coords, markerColors[thing.ind%4])
                     validateCheck("math", thing.math)
                     validateCheck("science", thing.science)
                     validateCheck("english", thing.english)
