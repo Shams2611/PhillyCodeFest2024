@@ -63,6 +63,41 @@
             justify-content: center;
             gap: 10px;
         }
+        .todo-list{
+            width: 100%S;
+        }
+        .todo-list {
+            flex-basis: 100%;
+            padding: 20px;
+            background: #f1f1f1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .task-list-item {
+            background: #ffffff;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .task-text {
+            flex-grow: 1;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #ccc;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: calc(100% - 22px);
+            box-sizing: border-box;
+        }
+        button {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="is-preload">
@@ -105,13 +140,16 @@
                     </div>
                     <p>Sessions completed: <span id="completedSessions">0</span></p>
                 </section>
-                <section class="todo-list">
-                    <h3>To-Do List</h3>
-                    <ul>
-                        <li>Read Chapter 4 <button>Edit</button> <button>Delete</button></li>
-                    </ul>
-                    <input type="text" placeholder="Add new task"><button>Add</button>
-                </section>
+                <div class="box features-row">
+                    <section class="todo-list">
+                        <h3>To-Do List</h3>
+                        <ul id="taskList">
+                            <!-- Tasks will be dynamically added here -->
+                        </ul>
+                        <input type="text" id="newTask" placeholder="Add new task" onkeypress="handleKeyPress(event)">
+                        <button onclick="addTask()">Add</button>
+                    </section>
+                </div>
             </div>
         </section>
 
@@ -140,7 +178,7 @@
         let totalDuration = timerDuration;
         let timerId;
         let completedSessions = 0;
-        const circumference = 2 * Math.PI * 60; // Circle circumference for a radius of 60
+        const circumference = 2 * Math.PI * 60; // Circle circumference for larger progress bar
 
         function startTimer() {
             if (!isRunning) {
@@ -185,8 +223,100 @@
         }
 
         function updateProgress(timeLeft) {
-            const progress = (timeLeft / totalDuration) * circumference;
+            const progress = (1 - timeLeft / totalDuration) * circumference;
             document.getElementById('progress').style.strokeDashoffset = circumference - progress;
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTasks();
+        });
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                addTask();
+            }
+        }
+
+        function addTask() {
+            const taskInput = document.getElementById('newTask');
+            const newTaskText = taskInput.value.trim();
+            if (newTaskText) {
+                const taskList = document.getElementById('taskList');
+                const taskItem = document.createElement('li');
+                taskItem.className = 'task-list-item';
+
+                const textSpan = document.createElement('span');
+                textSpan.textContent = newTaskText;
+                textSpan.className = 'task-text';
+
+                const checkButton = document.createElement('button');
+                checkButton.textContent = 'Done';
+                checkButton.onclick = function () {
+                    textSpan.classList.toggle('completed');
+                };
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function () {
+                    taskList.removeChild(taskItem);
+                };
+
+                taskItem.appendChild(textSpan);
+                taskItem.appendChild(checkButton);
+                taskItem.appendChild(deleteButton);
+                taskList.appendChild(taskItem);
+
+                taskInput.value = ''; // Clear the input field
+
+                saveTasks();
+            }
+        }
+
+        function saveTasks() {
+            const tasks = [];
+            document.querySelectorAll('.task-text').forEach(task => {
+                tasks.push({
+                    text: task.textContent,
+                    completed: task.classList.contains('completed')
+                });
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.forEach(task => {
+                const taskList = document.getElementById('taskList');
+                const taskItem = document.createElement('li');
+                taskItem.className = 'task-list-item';
+
+                const textSpan = document.createElement('span');
+                textSpan.textContent = task.text;
+                textSpan.className = 'task-text';
+                if (task.completed) {
+                    textSpan.classList.add('completed');
+                }
+
+                const checkButton = document.createElement('button');
+                checkButton.textContent = 'Done';
+                checkButton.onclick = function () {
+                    textSpan.classList.toggle('completed');
+                    saveTasks();
+                };
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function () {
+                    taskList.removeChild(taskItem);
+                    saveTasks();
+                };
+
+                taskItem.appendChild(textSpan);
+                taskItem.appendChild(checkButton);
+                taskItem.appendChild(deleteButton);
+                taskList.appendChild(taskItem);
+            });
         }
     </script>
 </body>
