@@ -516,7 +516,7 @@ function sendChat(info) {
         .then(response => response.json())
         .then(result => {
             console.log(result)
-            document.getElementById('generatedChat').textContent += result.response;
+            document.getElementById('generatedChat').textContent = result.response;
         })
         .catch(error => {
             console.error(error);

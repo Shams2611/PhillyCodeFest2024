@@ -260,6 +260,22 @@
 			color: var(--blue2);
 			font-weight: bolder;
         }
+		#aboutUs{
+			display: flex;
+			justify-content: space-around;
+		}
+		#aboutCol{
+			/* flex: 1; */
+			display: flex;
+			flex-direction: column;
+		}
+		#aboutImg{
+			height: 4rem;
+			width: 4rem;
+			/* height: 50%; */
+			object-fit: cover;
+			border-radius: .25rem;
+		}
 	</style>
 	<!-- <link rel="stylesheet" href="styles.css"> -->
 	<!-- leaflet css sheet -->
@@ -590,10 +606,32 @@
 		<!-- CTA -->
 		<section id="cta" style="background-color: #006266;">
 
-			<h2>Sign up for beta access</h2>
-			<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
+			<h2>About Us</h2>
+			<p>See the team behind this amazing project.</p>
+			<div id="aboutUs">
+				<div id="aboutCol">
+					<img id="aboutImg" src="images/profiles/shams.jpeg">
+					Shams
+				</div>
+				<div id="aboutCol">
+					<img id="aboutImg" src="images/profiles/elan.jpeg">
+					Elan
+				</div>
+				<div id="aboutCol">
+					<img id="aboutImg" src="images/profiles/max.jpeg">
+					Max
+				</div>
+				<div id="aboutCol">
+					<img id="aboutImg" src="images/profiles/chi.jpeg">
+					Chi
+				</div>
+				<div id="aboutCol">
+					<img id="aboutImg" src="images/profiles/nico.jpeg">
+					Nico
+				</div>
+			</div>
 
-			<form>
+			<!-- <form>
 				<div class="row gtr-50 gtr-uniform">
 					<div class="col-8 col-12-mobilep">
 						<input type="email" name="email" id="email" placeholder="Email Address" />
@@ -602,7 +640,7 @@
 						<input type="submit" value="Sign Up" class="fit" />
 					</div>
 				</div>
-			</form>
+			</form> -->
 
 		</section>
 
