@@ -111,7 +111,7 @@ function startCapturingImages() {
                 .then(response => response.json())
                 .then(data => {
                     if (data.drowsyDetected) {
-                        document.getElementById("tired").textContent = "You seem Tired";
+                        document.getElementById("tired").textContent = "You seem tired...";
                     } else {
                         document.getElementById("tired").textContent = "Looking good!";
                     }
