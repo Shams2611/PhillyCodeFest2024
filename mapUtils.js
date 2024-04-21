@@ -289,7 +289,7 @@ var start = L.marker(startCoords, { icon: startIcon }).addTo(map);
 
 // $scope.routingControl;
 
-let route = null;
+let routingControl;
 
 function routeToPoint(coords, lineColor) {
     // map.eachLayer((layer) => {
@@ -307,7 +307,14 @@ function routeToPoint(coords, lineColor) {
     //     map.removeControl($scope.routingControl);
     //   });
     // };
-    route = L.Routing.control({
+
+    if (routingControl) {
+        map.removeControl(routingControl);
+        map.removeLayer(routingControl._line);
+        routingControl = null; // Reset the routing control variable
+      }
+
+    routingControl = L.Routing.control({
         waypoints: [
             L.latLng(start.getLatLng()),
             L.latLng(coords)
