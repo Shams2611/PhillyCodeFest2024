@@ -303,46 +303,59 @@
 		#chatOuter {
 			display: flex;
 			flex-direction: column;
-			position: absolute;
+			position: fixed;
+			z-index: 1000;
 			bottom: 1rem;
 			right: 1rem;
 			padding: 1rem;
 			gap: .5rem;
 			min-height: 10rem;
-			background-color: lightgrey;
+			background-color: rgba(211, 211, 211, 0.411);
 			border-radius: 0.5rem;
 		}
 
 		#chatName {
-			background-color: #12CBC4;
+			background-color: #12cbc598;
 			padding: .25rem;
 			border-radius: .5rem;
 			text-align: center;
-			font-weight: bold;
+			/* font-weight: bold; */
+			color: black;
 		}
 
 		#chatSend {
 			display: flex;
 			align-items: flex-end;
 			/* doesnt work lol */
+			/* color: gray; */
+			/* color: red; */
 		}
 
 		#chatSendBtn {
-			background-color: #FFC312;
+			background-color: var(--blue);
 			border: 0;
-			padding: .5rem;
+			/* padding: .5rem; */
 			border-radius: .5rem;
+			/* min-width: 10rem; */
+			line-height: 2rem;
+			height: 2rem;
+			/* float: right; */
+		}
+		#chatSendBtn:hover{
+			background-color: var(--blue2);
 		}
 
 		#chatResponse {
 			padding: .5rem;
-			background-color: white;
+			background-color: rgba(255, 255, 255, 0.411);
 			border-radius: .5rem;
 			min-height: 4rem;
+			color: black;
 		}
 
 		#chatInp {
 			border: 0;
+			color: black;
 		}
 	</style>
 	<!-- <link rel="stylesheet" href="styles.css"> -->
@@ -690,17 +703,17 @@
 		<section id="cta" style="background-color: #006266;">
 			<div id="chatOuter" style="clear: both;">
 				<div id="chatName">
-					Chat with Ronald
+					Smart Chat
 				</div>
 				<div id="chatResponse">
-					A response will appear here.
+					...
 				</div>
 				<div>
-					<input type="text" id="chatInp" name="name">
+					<input type="text" id="chatInp" name="name" placeholder="Type your question here.">
 				</div>
 				<div id="chatSend">
 					<button id="chatSendBtn">
-						Send
+						<i class="fa-solid fa-paper-plane"></i>
 					</button>
 				</div>
 			</div>
