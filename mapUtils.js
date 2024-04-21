@@ -184,6 +184,11 @@ function getData(info) {
                     }
                     console.log(thing.relevancy)
                     // if()
+
+                    let campus = info[3]
+                    if(thing.restriction != "n/a" && thing.restriction != campus){
+                        thing.relevancy -= 25
+                    }
                 }
 
                 thing.relevancy-=(dist*20)
