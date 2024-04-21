@@ -8,6 +8,8 @@ load_dotenv()
 app = Flask(__name__, template_folder="../",static_url_path="/", static_folder="../")
 CORS(app)  # Enable CORS for all routes by default
 dd = DrowsyDetection()
+lang = 'en'
+
 @app.route("/reset", methods=["POST"])
 def reroute():
     dd.reset()

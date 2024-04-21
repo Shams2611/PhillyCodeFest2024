@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request, render_template, redirect, Response
 from flask_cors import CORS
 from dotenv import load_dotenv
 import replicate
-import cqbot
 
 load_dotenv()
 
