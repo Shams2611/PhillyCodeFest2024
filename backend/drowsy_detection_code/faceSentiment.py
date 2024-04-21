@@ -33,12 +33,13 @@ class DrowsyDetection:
             #pprint.pp(emodict)
             if (emodict['Value']==False and emodict['Confidence']>96) or (emodict['Value']==True and emodict['Confidence']<70) and (max["Type"] or max['Type']=="CALM"):
                 #print(emodict)
-                self.__count.changeC(1)
-                print(self.__count.returnC())
-            
-            
+                # self.__count.changeC(1)
+                # print(self.__count.returnC())
+                print("TIRED")
+                return 1
+            return 0
         except IndexError:
-            pass
+            return 0
         
     def getCount(self):
         return self.__count.returnC()
