@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chatOuter {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            padding: 1rem;
+            gap: .5rem;
+            min-height: 10rem;
+            background-color: lightgrey;
+            border-radius: 0.5rem;
+        }
+
+        #chatName {
+            background-color: #12CBC4;
+            padding: .25rem;
+            border-radius: .5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #chatSend {
+            display: flex;
+            align-items: flex-end;
+            /* doesnt work lol */
+        }
+
+        #chatSendBtn {
+            background-color: #FFC312;
+            border: 0;
+            padding: .5rem;
+            border-radius: .5rem;
+        }
+
+        #chatResponse {
+            padding: .5rem;
+            background-color: white;
+            border-radius: .5rem;
+            min-height: 4rem;
+        }
+
+        #chatInp {
+            border: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chatOuter">
+        <div id="chatName">
+            Chat with Ronald
+        </div>
+        <div id="chatResponse">
+            A response will appear here.
+        </div>
+        <div>
+            <input type="text" id="chatInp" name="name">
+        </div>
+        <div id="chatSend">
+            <button id="chatSendBtn">
+                Send
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>
