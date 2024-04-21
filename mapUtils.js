@@ -192,7 +192,7 @@ function getData(info) {
                 }
 
                 thing.relevancy-=(dist*20)
-                thing.relevancy+=getRandomNumber(1,10)
+                thing.relevancy-=getRandomNumber(2,10)
 
                 if(thing.relevancy>100){
                     thing.relevancy = 100
