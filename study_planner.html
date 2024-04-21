@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="icon" type="image/x-icon" href="images/markers/marker_studying.png" />
+
     <style>
         .features-row {
             display: flex;
@@ -98,6 +100,22 @@
         button {
             cursor: pointer;
         }
+        @media only screen and (max-width: 600px) {
+    .features-row {
+        flex-direction: column; /* Stacks the flex children vertically */
+    }
+    .video-stream, .pomodoro-timer, .todo-list {
+        flex-basis: 100%; /* Each box takes full width */
+        margin: 10px 0; /* Adds vertical spacing and removes horizontal margin */
+    }
+    .video-stream, .pomodoro-timer {
+        padding: 15px; /* Reduces padding for smaller screens */
+    }
+    .todo-list {
+        padding: 15px; /* Consistent padding with other boxes */
+    }
+}
+
     </style>
 </head>
 <body class="is-preload">
@@ -180,7 +198,6 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-<<<<<<< HEAD
     <script>
         let isRunning = false;
         let timerDuration = 25 * 60; // 25 minutes
@@ -328,8 +345,6 @@
             });
         }
     </script>
-=======
     <script src="assets/js/studyutil.js"></script>
->>>>>>> e4ee4633aeb80677578003d9d78a74aa031582f6
 </body>
 </html>
