@@ -68,6 +68,8 @@ let scienceRow = document.getElementById("scienceRow")
 let englishRow = document.getElementById("englishRow")
 let artsRow = document.getElementById("mathRow")
 
+let starRow = document.getElementById("starRow")
+
 
 // console.log(infoImg)
 
@@ -184,7 +186,7 @@ function getData(info) {
                     // if()
                 }
 
-                thing.relevancy-=(dist*30)
+                thing.relevancy-=(dist*20)
                 thing.relevancy+=getRandomNumber(1,10)
 
                 if(thing.relevancy>100){
@@ -214,6 +216,9 @@ function getData(info) {
                     validateCheck("science", thing.science)
                     validateCheck("english", thing.english)
                     validateCheck("arts", thing.arts)
+
+                    starRow.style = thing.rating == "n/a" ? "display: none;" : "display: flex";
+
                     locationNameLabel.innerText = thing.name
                     locationTypeLabel.innerText = capitalizeWords(thing.type)
                     locationAddressLabel.innerText = thing.address
