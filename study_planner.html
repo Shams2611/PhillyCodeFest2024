@@ -140,7 +140,7 @@
         let totalDuration = timerDuration;
         let timerId;
         let completedSessions = 0;
-        const circumference = 2 * Math.PI * 60; // Circle circumference for larger progress bar
+        const circumference = 2 * Math.PI * 60; // Circle circumference for a radius of 60
 
         function startTimer() {
             if (!isRunning) {
@@ -185,7 +185,7 @@
         }
 
         function updateProgress(timeLeft) {
-            const progress = (1 - timeLeft / totalDuration) * circumference;
+            const progress = (timeLeft / totalDuration) * circumference;
             document.getElementById('progress').style.strokeDashoffset = circumference - progress;
         }
     </script>
