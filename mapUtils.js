@@ -120,8 +120,8 @@ function getData() {
                 //     ind+=4
                 // }
                 // console.log("-"+coords+"-"+i++)
-                var newMarker = new L.marker(coords, { icon: iconsList[ind] })
-                markers[ind].push(newMarker)
+                var newMarker = new L.marker(coords, { icon: iconsList[thing.ind] })
+                markers[thing.ind].push(newMarker)
                 newMarker.addTo(map).on("click", function (e) {
                     routeToPoint(coords, markerColors[thing.ind%4])
                     validateCheck("math", thing.math)
