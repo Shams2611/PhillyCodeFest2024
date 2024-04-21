@@ -121,25 +121,27 @@ function getData(info) {
                 //name, age, gender, school, subject, additional
                 //0   ,   1,      2,      3,       4,          5
                 if (info) {
-                    console.log("hello")
-                    console.log('math', thing.math, (thing.math == 'no'))
-                    switch ("study_"+info[4]) {
-                        case "math":
+                    // console.log("hello")
+                    // console.log('math', thing.math, (thing.math == 'no'))
+                    console.log(info[4])
+                    console.log(thing.math)
+                    switch (info[4]) {
+                        case "study_math":
                             if (thing.math == 'no') {
                                 relevant = false
                             }
                             break;
-                        case "science":
+                        case "study_science":
                             if (thing.science == 'no') {
                                 relevant = false
                             }
                             break;
-                        case "english":
+                        case "study_english":
                             if (thing.english == 'no') {
                                 relevant = false
                             }
                             break;
-                        case "arts":
+                        case "study_arts":
                             if (thing.arts == 'no') {
                                 relevant = false
                             }
